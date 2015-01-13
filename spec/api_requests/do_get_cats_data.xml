@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:SandboxWebApi">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DoGetCatsDataRequest>
+         <urn:countryId>1</urn:countryId>
+         <!--Optional:-->
+         <urn:localVersion>0</urn:localVersion>
+         <urn:webapiKey>sa86a870</urn:webapiKey>
+      </urn:DoGetCatsDataRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

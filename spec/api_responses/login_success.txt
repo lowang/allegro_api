@@ -1,0 +1,24 @@
+HTTP/1.1 200 OK
+Vary: Accept-Encoding
+Set-Cookie: ws2=fc09419382a4bafbd493e21ba668a9b5; expires=Fri, 05-Dec-2014 15:45:50 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws3=N38e667c0dedeaae5af5aaf96d5e2b29a; expires=Thu, 29-Jun-2113 15:15:50 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws4=x; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: TEST_QXLSESSID=ce296e49670f156855f1c216288fa3f09fbc21840bcc68bb00; path=/; domain=.allegro.pl.webapisandbox.pl
+Cache-Control: private
+Pragma: no-cache
+Set-Cookie: qeppo_login2=%7B%22welcome%22%3A%22Witaj%2C%22%2C%22id%22%3A%2239887691%22%2C%22username%22%3A%22zibipro%22%2C%22fbConnected%22%3Afalse%2C%22qeppo_hash%22%3A%22QhuYNqXSUJ2cuH%2BuMpQtHC6T7A9ocE8Za99rfgv1ni0%3D%22%2C%22isCompany%22%3Afalse%7D; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: QXLDATA=%2BQNdJR%2B5jPCeP%2Fdw3WwC1ZQFqQhEhHJt7olCvBL1u9M%3D%23%23%23Ywgx5cgdZfHwzrl73Oy8wmQaHzZ4r3tOQ3FRjlZ7gHRv3coJI49vN4vyN952Ej%2FLvJct062FS9xuKOmhEbMAEjra5FB%2Blwu4zpxI4642lwvJaXJp5w1Y8ZxSz8KQxNF0XvLCz6X0ThjuVs6BFNph; expires=Fri, 05-Dec-2014 21:15:50 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: _bS=0; expires=Mon, 15-Dec-2014 15:15:50 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Content-Type: text/xml; charset=utf-8
+X-Backend: allegro_qeppo
+Content-Length: 423
+Accept-Ranges: bytes
+Date: Fri, 05 Dec 2014 15:15:50 GMT
+Age: 0
+Connection: keep-alive
+X-Hit: HIT 0
+X-Origin: vte29-frontend-vte01
+X-Frame-Options: SAMEORIGIN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:SandboxWebApi"><SOAP-ENV:Body><ns1:doLoginEncResponse><ns1:sessionHandlePart>ce296e49670f156855f1c216288fa3f09fbc21840bcc68bb00_1</ns1:sessionHandlePart><ns1:userId>39887691</ns1:userId><ns1:serverTime>1417792550</ns1:serverTime></ns1:doLoginEncResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>

@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:SandboxWebApi">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DoGetItemFieldsRequest>
+         <urn:sessionId>d208ef47cf0df015c6e2224d96b37fc3d6f72c2b0bcc68bb00_1</urn:sessionId>
+         <urn:itemId>4762526010</urn:itemId>
+      </urn:DoGetItemFieldsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

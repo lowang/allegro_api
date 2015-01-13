@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Vary: Accept-Encoding
+Set-Cookie: ws2=088ac59cffcf12da7457dc1c3530a45e; expires=Fri, 05-Dec-2014 15:54:57 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws3=Ne48216543bfaf5cdf51c88e979b94cf7; expires=Thu, 29-Jun-2113 15:24:57 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws4=x; path=/; domain=.allegro.pl.webapisandbox.pl
+Content-Type: text/xml; charset=utf-8
+X-Backend: allegro_qeppo
+Content-Length: 322
+Accept-Ranges: bytes
+Date: Fri, 05 Dec 2014 15:24:57 GMT
+Age: 0
+Connection: keep-alive
+X-Hit: HIT 0
+X-Origin: vte29-frontend-vte01
+X-Frame-Options: SAMEORIGIN
+Cache-Control: private
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:SandboxWebApi"><SOAP-ENV:Body><ns1:doQuerySysStatusResponse><ns1:info>1.0.93</ns1:info><ns1:verKey>1414748778</ns1:verKey></ns1:doQuerySysStatusResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>

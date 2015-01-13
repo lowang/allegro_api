@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:SandboxWebApi">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DoGetSellFormFieldsExtRequest>
+         <urn:countryCode>1</urn:countryCode>
+         <!--Optional:-->
+         <urn:localVersion>0</urn:localVersion>
+         <urn:webapiKey>sa86a870</urn:webapiKey>
+      </urn:DoGetSellFormFieldsExtRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

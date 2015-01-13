@@ -1,0 +1,19 @@
+HTTP/1.1 500 Internal Service Error
+Vary: Accept-Encoding
+Set-Cookie: ws2=800f112a0df87799c5fe94210913d005; expires=Fri, 05-Dec-2014 16:32:33 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws3=N4fb3a0b9c4e83df9a4862ad786730f4c; expires=Thu, 29-Jun-2113 16:02:33 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws4=x; path=/; domain=.allegro.pl.webapisandbox.pl
+Content-Type: text/xml; charset=utf-8
+X-Backend: allegro_qeppo
+Content-Length: 373
+Accept-Ranges: bytes
+Date: Fri, 05 Dec 2014 16:02:33 GMT
+Age: 0
+Connection: keep-alive
+X-Hit: HIT 0
+X-Origin: vte29-frontend-vte01
+X-Frame-Options: SAMEORIGIN
+Cache-Control: private
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Body><SOAP-ENV:Fault><faultcode>ERR_UNKNOWN_FEATURE</faultcode><faultstring>Proszę wybrać poprawną opcję zapytania.</faultstring><faultactor>doQuerySysStatus - Unknown feature</faultactor></SOAP-ENV:Fault></SOAP-ENV:Body></SOAP-ENV:Envelope>
