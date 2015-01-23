@@ -4,6 +4,7 @@ require 'savon'
 
 require "allegro_api/version"
 require "allegro_api/exceptions"
+require "allegro_api/fid"
 require "allegro_api/field"
 require "allegro_api/category"
 require "allegro_api/client"
@@ -12,7 +13,6 @@ require "allegro_api/item"
 require "allegro_api/auction"
 
 module AllegroApi
-  require 'allegro_api/railtie' if defined?(Rails)
 
   # umożliwia ustawienie cacha do przechowywania lokalnych dancyh,
   # bez potrzeby ciągłego ich pobierania z allegro (lista pól, kategorii)

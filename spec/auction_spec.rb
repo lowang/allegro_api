@@ -12,6 +12,132 @@ describe AllegroApi::Auction do
     expect(auction.fields).to be_empty
   end
 
+  describe '#name' do
+    it 'returns value of the NAME field' do
+      auction.fields[AllegroApi::Fid::NAME] = 'some auction'
+      expect(auction.name).to eq 'some auction'
+    end
+  end
+
+  describe '#name=' do
+    it 'sets value of the NAME field' do
+      auction.name = 'some auction'
+      expect(auction.fields[AllegroApi::Fid::NAME]).to eq 'some auction'
+    end
+  end
+
+  describe '#category_id' do
+    it 'returns value of the CATEGORY field' do
+      auction.fields[AllegroApi::Fid::CATEGORY] = 11
+      expect(auction.category_id).to eq 11
+    end
+  end
+
+  describe '#category_id=' do
+    it 'sets value of the CATEGORY field' do
+      auction.category_id = 12
+      expect(auction.fields[AllegroApi::Fid::CATEGORY]).to eq 12
+    end
+  end
+
+  describe '#duration' do
+    it 'returns value of the DURATION field' do
+      auction.fields[AllegroApi::Fid::DURATION] = 11
+      expect(auction.duration).to eq 11
+    end
+  end
+
+  describe '#duration=' do
+    it 'sets value of the DURATION field' do
+      auction.duration = 12
+      expect(auction.fields[AllegroApi::Fid::DURATION]).to eq 12
+    end
+  end
+
+  describe '#quantity' do
+    it 'returns value of the QUANTITY field' do
+      auction.fields[AllegroApi::Fid::QUANTITY] = 11
+      expect(auction.quantity).to eq 11
+    end
+  end
+
+  describe '#quantity=' do
+    it 'sets value of the QUANTITY field' do
+      auction.quantity = 12
+      expect(auction.fields[AllegroApi::Fid::QUANTITY]).to eq 12
+    end
+  end
+
+  describe '#price' do
+    it 'returns value of the BUY_NOW_PRICE field' do
+      auction.fields[AllegroApi::Fid::BUY_NOW_PRICE] = 6.69
+      expect(auction.price).to eq 6.69
+    end
+  end
+
+  describe '#price=' do
+    it 'sets value of the BUY_NOW_PRICE field' do
+      auction.price = 7.72
+      expect(auction.fields[AllegroApi::Fid::BUY_NOW_PRICE]).to eq 7.72
+    end
+  end
+
+  describe '#country' do
+    it 'returns value of the COUNTRY field' do
+      auction.fields[AllegroApi::Fid::COUNTRY] = 1
+      expect(auction.country).to eq 1
+    end
+  end
+
+  describe '#country=' do
+    it 'sets value of the COUNTRY field' do
+      auction.country = 2
+      expect(auction.fields[AllegroApi::Fid::COUNTRY]).to eq 2
+    end
+  end
+
+  describe '#city' do
+    it 'returns value of the CITY field' do
+      auction.fields[AllegroApi::Fid::CITY] = 'Gdynia'
+      expect(auction.city).to eq 'Gdynia'
+    end
+  end
+
+  describe '#city=' do
+    it 'sets value of the CITY field' do
+      auction.city = 'Gdańsk'
+      expect(auction.fields[AllegroApi::Fid::CITY]).to eq 'Gdańsk'
+    end
+  end
+
+  describe '#info' do
+    it 'returns value of the INFO field' do
+      auction.fields[AllegroApi::Fid::INFO] = 'product description'
+      expect(auction.info).to eq 'product description'
+    end
+  end
+
+  describe '#info=' do
+    it 'sets value of the INFO field' do
+      auction.info = 'product info'
+      expect(auction.fields[AllegroApi::Fid::INFO]).to eq 'product info'
+    end
+  end
+
+  describe '#zipcode' do
+    it 'returns value of the ZIPCODE field' do
+      auction.fields[AllegroApi::Fid::ZIPCODE] = '80-800'
+      expect(auction.zipcode).to eq '80-800'
+    end
+  end
+
+  describe '#zipcode=' do
+    it 'sets value of the ZIPCODE field' do
+      auction.zipcode = '80-800'
+      expect(auction.fields[AllegroApi::Fid::ZIPCODE]).to eq '80-800'
+    end
+  end
+
   describe 'from_api' do
     let(:data) do
       [

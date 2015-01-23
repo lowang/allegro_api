@@ -25,6 +25,79 @@ module AllegroApi
       api_data
     end
 
+    def name=(value)
+      self.fields[AllegroApi::Fid::NAME] = value
+    end
+
+    def name
+      self.fields[AllegroApi::Fid::NAME]
+    end
+
+    def category_id=(value)
+      self.fields[AllegroApi::Fid::CATEGORY] = value
+    end
+
+    def category_id
+      self.fields[AllegroApi::Fid::CATEGORY]
+    end
+
+    def duration=(value)
+      self.fields[AllegroApi::Fid::DURATION] = value
+    end
+
+    def duration
+      self.fields[AllegroApi::Fid::DURATION]
+    end
+
+
+    def quantity=(value)
+      self.fields[AllegroApi::Fid::QUANTITY] = value
+    end
+
+    def quantity
+      self.fields[AllegroApi::Fid::QUANTITY]
+    end
+
+    def price=(value)
+      self.fields[AllegroApi::Fid::BUY_NOW_PRICE] = value
+    end
+
+    def price
+      self.fields[AllegroApi::Fid::BUY_NOW_PRICE]
+    end
+
+    def country=(value)
+      self.fields[AllegroApi::Fid::COUNTRY] = value
+    end
+
+    def country
+      self.fields[AllegroApi::Fid::COUNTRY]
+    end
+
+    def city=(value)
+      self.fields[AllegroApi::Fid::CITY] = value
+    end
+
+    def city
+      self.fields[AllegroApi::Fid::CITY]
+    end
+
+    def info=(value)
+      self.fields[AllegroApi::Fid::INFO] = value
+    end
+
+    def info
+      self.fields[AllegroApi::Fid::INFO]
+    end
+
+    def zipcode=(value)
+      self.fields[AllegroApi::Fid::ZIPCODE] = value
+    end
+
+    def zipcode
+      self.fields[AllegroApi::Fid::ZIPCODE]
+    end
+
     private
 
     def field_api_value(fid, value)
