@@ -18,7 +18,8 @@ module AllegroApi
 
     def soap_client
       @soap_client ||= Savon.client(wsdl: wsdl, log_level: log_level, log: logger,
-        env_namespace: :soapenv, namespace_identifier: :urn, pretty_print_xml: true)
+        env_namespace: :soapenv, namespace_identifier: :urn, pretty_print_xml: true,
+        ssl_verify_mode: :none)
     end
 
 
