@@ -11,7 +11,9 @@ module AllegroApi
     end
 
     def find_auction(auction_id)
-      Auction.from_api @client.call(:do_get_item_fields, session_id: id, item_id: auction_id)[:do_get_item_fields_response][:item_fields][:item]
+      auction = Auction.from_api @client.call(:do_get_item_fields, session_id: id, item_id: auction_id)[:do_get_item_fields_response][:item_fields][:item]
+      auction.id = auction_id
+      auction
     end
 
     def check_auction(auction)
@@ -36,6 +38,15 @@ module AllegroApi
     def get_not_sold_items
       response = @client.call(:do_get_my_not_sold_items, session_id: id)[:do_get_my_not_sold_items_response][:not_sold_items_list]
       process_items_response(response)
+    end
+
+
+    def auctions
+      Enumerator.new do |collection|
+        get_sell_items.each do |item|
+          collection << find_auction(item.id)
+        end
+      end
     end
 
     private

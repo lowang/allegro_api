@@ -126,6 +126,10 @@ describe AllegroApi::Session do
         it 'has name set' do
           expect(auction.fields[1]).to eq "niezwykły przedmiot"
         end
+
+        it 'has id set' do
+          expect(auction.id).to eq 4567
+        end
       end
     end
   end
@@ -152,6 +156,40 @@ describe AllegroApi::Session do
         expect(response).to be_instance_of(Hash)
         expect(response[:id]).to eq 4762580093
         expect(response[:cost]).to eq 0.25
+      end
+    end
+  end
+
+  describe '#auctions' do
+    it 'returns enumerator' do
+      expect(session.auctions).to be_instance_of(Enumerator)
+    end
+
+    describe 'enumerator' do
+      let(:item1) { AllegroApi::Item.new }
+      let(:auction1) { AllegroApi::Auction.new }
+      let(:item2) { AllegroApi::Item.new }
+      let(:auction2) { AllegroApi::Auction.new }
+      let(:enumerator) { session.auctions }
+
+      before :each do
+        item1.id = 1234
+        auction1.id = 1234
+        item2.id = 5678
+        auction2.id = 5678
+        allow(session).to receive(:get_sell_items).and_return([item1, item2])
+        allow(session).to receive(:find_auction).and_return(auction1, auction2)
+      end
+
+      it 'requests items' do
+        enumerator.to_a
+        expect(session).to have_received(:get_sell_items)
+      end
+
+      it 'retrives auction data for each item' do
+        expect(session).to receive(:find_auction).with(item1.id).and_return(auction1).ordered
+        expect(session).to receive(:find_auction).with(item2.id).and_return(auction2).ordered
+        expect(enumerator.to_a).to eq([auction1, auction2])
       end
     end
   end
