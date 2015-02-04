@@ -7,6 +7,10 @@ describe AllegroApi::Auction do
     expect(auction).to respond_to(:fields)
   end
 
+  it 'has an id' do
+    expect(auction).to respond_to(:id=, :id)
+  end
+
   it 'initializes fields with empty hash' do
     expect(auction.fields).to be_instance_of(Hash)
     expect(auction.fields).to be_empty

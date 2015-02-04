@@ -1,5 +1,7 @@
 module AllegroApi
   class Auction
+    attr_accessor :id
+
     attr_reader :fields
 
     def initialize
