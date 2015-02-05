@@ -114,6 +114,7 @@ module AllegroApi
           data[:fvalue_float].to_f
         end
       when :datetime then Time.at(data[:fvalue_datetime].to_i)
+      when :image then AllegroApi::Image.from_api(data[:fvalue_image])
       else
         raise "unknown value_type #{value_type}"
       end

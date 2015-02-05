@@ -116,15 +116,15 @@ describe AllegroApi::Session do
         let(:auction)  {  session.find_auction(4567) }
 
         it 'has fields initialized' do
-          expect(auction.fields.size).to eq 24
+          expect(auction.fields.size).to eq 26
         end
 
         it 'has category set' do
-          expect(auction.fields[2]).to eq 76652
+          expect(auction.fields[2]).to eq 8849
         end
 
         it 'has name set' do
-          expect(auction.fields[1]).to eq "niezwykły przedmiot"
+          expect(auction.fields[1]).to eq "aukcja z obrazkami"
         end
 
         it 'has id set' do

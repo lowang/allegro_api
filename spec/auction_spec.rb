@@ -3,6 +3,9 @@ require_relative './test_cache'
 describe AllegroApi::Auction do
   let(:auction) { AllegroApi::Auction.new }
 
+  let(:image_data) { File.binread(File.expand_path('../fixtures/image.jpg', __FILE__))}
+  let(:api_image_data) { Base64.encode64(Base64.encode64(image_data))}
+
   it 'has fields' do
     expect(auction).to respond_to(:fields)
   end
@@ -209,6 +212,7 @@ describe AllegroApi::Auction do
       auction.fields[6] = 1..10
       auction.fields[7] = 2.5..6.9
       auction.fields[8] = Date.new(2014,01,01)..Date.new(2014,12,31)
+      auction.fields[AllegroApi::Fid::PHOTO1] = AllegroApi::Image.new data: image_data
     end
 
     it 'returns array' do
@@ -216,7 +220,7 @@ describe AllegroApi::Auction do
     end
 
     it 'transforms each field to api data' do
-      expect(auction.to_api.size).to eq 8
+      expect(auction.to_api.size).to eq 9
     end
 
     it 'transforms integer values' do
@@ -345,6 +349,22 @@ describe AllegroApi::Auction do
           fvalue_range_float_max: 0},
         fvalue_range_date: {fvalue_range_date_min: '01-01-2014',
         fvalue_range_date_max: '31-12-2014'} })
+    end
+
+    it 'transforms image values' do
+      expect(auction.to_api[8]).to eq({ fid: AllegroApi::Fid::PHOTO1,
+        fvalue_string: "",
+        fvalue_int: 0,
+        fvalue_float: 0,
+        fvalue_image: api_image_data,
+        fvalue_datetime: 0,
+        fvalue_date: '',
+        fvalue_range_int: {fvalue_range_int_min: 0,
+          fvalue_range_int_max: 0},
+        fvalue_range_float: {fvalue_range_float_min: 0,
+          fvalue_range_float_max: 0},
+        fvalue_range_date: {fvalue_range_date_min: '',
+        fvalue_range_date_max: ''} })
     end
   end
 end

@@ -219,12 +219,15 @@ describe AllegroApi::Field do
   end
 
   describe '#value_from_api' do
+    let(:image_data) { File.binread(File.expand_path('../fixtures/image.jpg', __FILE__))}
+    let(:api_image_data) { Base64.encode64(Base64.encode64(image_data))}
+
     let(:api_data) do
       { fid: "1",
         fvalue_string: "string value",
         fvalue_int: "1",
         fvalue_float: "2.54",
-        fvalue_image: nil,
+        fvalue_image: api_image_data,
         fvalue_datetime: "1419260065",
         fvalue_date: '23-12-2014',
         fvalue_range_int: {fvalue_range_int_min: "0",
@@ -233,6 +236,14 @@ describe AllegroApi::Field do
           fvalue_range_float_max: "4.5"},
         fvalue_range_date: {fvalue_range_date_min: '01-12-2014',
         fvalue_range_date_max: '31-12-2014'} }
+    end
+
+    describe 'for image type field' do
+      let(:field) { AllegroApi::Field.new value_type: :image }
+
+      it 'creates image' do
+        expect(field.value_from_api(api_data)).to be_instance_of AllegroApi::Image
+      end
     end
 
     describe 'for string type field' do

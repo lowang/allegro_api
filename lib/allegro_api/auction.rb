@@ -118,23 +118,24 @@ module AllegroApi
         fvalue_range_date_max: ''} }
 
         case value
-        when Integer then api_data[:fvalue_int] = value
-        when Float then api_data[:fvalue_float] = value
-        when String then api_data[:fvalue_string] = value
-        when Date then api_data[:fvalue_date] = value.strftime '%d-%m-%Y'
-        when Time then api_data[:fvalue_datetime] = value.to_i
-        when Range
-          case value.min
-          when Integer
-            api_data[:fvalue_range_int][:fvalue_range_int_min] = value.min
-            api_data[:fvalue_range_int][:fvalue_range_int_max] = value.max
-          when Float
-            api_data[:fvalue_range_float][:fvalue_range_float_min] = value.min
-            api_data[:fvalue_range_float][:fvalue_range_float_max] = value.max
-          when Date
-            api_data[:fvalue_range_date][:fvalue_range_date_min] = value.min.strftime '%d-%m-%Y'
-            api_data[:fvalue_range_date][:fvalue_range_date_max] = value.max.strftime '%d-%m-%Y'
-          end
+          when Integer then api_data[:fvalue_int] = value
+          when Float then api_data[:fvalue_float] = value
+          when String then api_data[:fvalue_string] = value
+          when Date then api_data[:fvalue_date] = value.strftime '%d-%m-%Y'
+          when Time then api_data[:fvalue_datetime] = value.to_i
+          when Range
+            case value.min
+              when Integer
+                api_data[:fvalue_range_int][:fvalue_range_int_min] = value.min
+                api_data[:fvalue_range_int][:fvalue_range_int_max] = value.max
+              when Float
+                api_data[:fvalue_range_float][:fvalue_range_float_min] = value.min
+                api_data[:fvalue_range_float][:fvalue_range_float_max] = value.max
+              when Date
+                api_data[:fvalue_range_date][:fvalue_range_date_min] = value.min.strftime '%d-%m-%Y'
+                api_data[:fvalue_range_date][:fvalue_range_date_max] = value.max.strftime '%d-%m-%Y'
+            end
+          when Image then api_data[:fvalue_image] = value.to_api
         end
         api_data
     end
