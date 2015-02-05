@@ -116,7 +116,7 @@ describe AllegroApi::Session do
         let(:auction)  {  session.find_auction(4567) }
 
         it 'has fields initialized' do
-          expect(auction.fields.size).to eq 26
+          expect(auction.fields.size).to eq 24
         end
 
         it 'has category set' do

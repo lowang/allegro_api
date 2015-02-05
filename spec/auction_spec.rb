@@ -10,6 +10,10 @@ describe AllegroApi::Auction do
     expect(auction).to respond_to(:fields)
   end
 
+  it 'has photos' do
+    expect(auction).to respond_to(:photos)
+  end
+
   it 'has an id' do
     expect(auction).to respond_to(:id=, :id)
   end
@@ -17,6 +21,11 @@ describe AllegroApi::Auction do
   it 'initializes fields with empty hash' do
     expect(auction.fields).to be_instance_of(Hash)
     expect(auction.fields).to be_empty
+  end
+
+  it 'initializes photos with empty array' do
+    expect(auction.photos).to be_instance_of(Array)
+    expect(auction.photos).to be_empty
   end
 
   describe '#name' do
@@ -148,7 +157,7 @@ describe AllegroApi::Auction do
   describe 'from_api' do
     let(:data) do
       [
-        { fid: "1",
+        { fid: AllegroApi::Fid::NAME.to_s,
           fvalue_string: "nazwa aukcji",
           fvalue_int: "0",
           fvalue_float: "0",
@@ -161,19 +170,32 @@ describe AllegroApi::Auction do
             fvalue_range_float_max: "0"},
           fvalue_range_date: {fvalue_range_date_min: nil,
           fvalue_range_date_max: nil} },
-        { :fid => "2",
-          :fvalue_string => nil,
-          :fvalue_int => "76652",
-          :fvalue_float => "0",
-          :fvalue_image => nil,
-          :fvalue_datetime => "0",
-          :fvalue_date => nil,
-          :fvalue_range_int => {:fvalue_range_int_min => "0",
-          :fvalue_range_int_max => "0"},
-          :fvalue_range_float => {:fvalue_range_float_min => "0",
-          :fvalue_range_float_max => "0"},
-          :fvalue_range_date => {:fvalue_range_date_min => nil,
-          :fvalue_range_date_max => nil} }
+        { fid: AllegroApi::Fid::CATEGORY.to_s,
+          fvalue_string: nil,
+          fvalue_int: "76652",
+          fvalue_float: "0",
+          fvalue_image: nil,
+          fvalue_datetime: "0",
+          fvalue_date: nil,
+          fvalue_range_int: {fvalue_range_int_min: "0",
+          fvalue_range_int_max: "0"},
+          fvalue_range_float: {fvalue_range_float_min: "0",
+          fvalue_range_float_max: "0"},
+          fvalue_range_date: {fvalue_range_date_min: nil,
+          fvalue_range_date_max: nil} },
+        { fid: AllegroApi::Fid::PHOTO1.to_s,
+          fvalue_string: nil,
+          fvalue_int: "0",
+          fvalue_float: "0",
+          fvalue_image: api_image_data,
+          fvalue_datetime: "0",
+          fvalue_date: nil,
+          fvalue_range_int: {fvalue_range_int_min: "0",
+          fvalue_range_int_max: "0"},
+          fvalue_range_float: {fvalue_range_float_min: "0",
+          fvalue_range_float_max: "0"},
+          fvalue_range_date: {fvalue_range_date_min: nil,
+          fvalue_range_date_max: nil} }
       ]
     end
 
@@ -181,8 +203,9 @@ describe AllegroApi::Auction do
 
     before :each do
       AllegroApi.cache = TestCache.new
-      AllegroApi.cache.store(:fields, 1, AllegroApi::Field.new(value_type: :string))
-      AllegroApi.cache.store(:fields, 2, AllegroApi::Field.new(value_type: :integer))
+      AllegroApi.cache.store(:fields, AllegroApi::Fid::NAME, AllegroApi::Field.new(value_type: :string))
+      AllegroApi.cache.store(:fields, AllegroApi::Fid::CATEGORY, AllegroApi::Field.new(value_type: :integer))
+      AllegroApi.cache.store(:fields, AllegroApi::Fid::PHOTO1, AllegroApi::Field.new(value_type: :image))
     end
 
     after :each do
@@ -195,8 +218,13 @@ describe AllegroApi::Auction do
 
     it 'sets the values for the fields of the auction' do
       expect(auction.fields.size).to eq 2
-      expect(auction.fields[1]).to eq "nazwa aukcji"
-      expect(auction.fields[2]).to eq 76652
+      expect(auction.fields[AllegroApi::Fid::NAME]).to eq "nazwa aukcji"
+      expect(auction.fields[AllegroApi::Fid::CATEGORY]).to eq 76652
+    end
+
+    it 'populates photos' do
+      expect(auction.photos.size).to eq 1
+      expect(auction.photos.first.data).to eq image_data
     end
   end
 
@@ -212,7 +240,7 @@ describe AllegroApi::Auction do
       auction.fields[6] = 1..10
       auction.fields[7] = 2.5..6.9
       auction.fields[8] = Date.new(2014,01,01)..Date.new(2014,12,31)
-      auction.fields[AllegroApi::Fid::PHOTO1] = AllegroApi::Image.new data: image_data
+      auction.photos << AllegroApi::Image.new(data: image_data)
     end
 
     it 'returns array' do

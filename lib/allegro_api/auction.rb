@@ -3,9 +3,11 @@ module AllegroApi
     attr_accessor :id
 
     attr_reader :fields
+    attr_reader :photos
 
     def initialize
       @fields = Hash.new
+      @photos = Array.new
     end
 
 
@@ -13,7 +15,11 @@ module AllegroApi
       auction = new
       data.each do |field_data|
         fid = field_data[:fid].to_i
-        auction.fields[fid] = Field.find(fid).value_from_api(field_data)
+        if AllegroApi::Fid::PHOTO_FIELDS.include? fid
+          auction.photos << Field.find(fid).value_from_api(field_data)
+        else
+          auction.fields[fid] = Field.find(fid).value_from_api(field_data)
+        end
       end
       auction
     end
@@ -23,6 +29,12 @@ module AllegroApi
       api_data = []
       fields.each_pair do |fid, value|
         api_data << field_api_value(fid, value)
+      end
+      photo_idx = 0
+      AllegroApi::Fid::PHOTO_FIELDS.each do |fid|
+        break unless photos[photo_idx]
+        api_data << field_api_value(fid, photos[photo_idx])
+        photo_idx += 1
       end
       api_data
     end
