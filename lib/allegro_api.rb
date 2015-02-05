@@ -11,6 +11,7 @@ require "allegro_api/client"
 require "allegro_api/session"
 require "allegro_api/item"
 require "allegro_api/auction"
+require "allegro_api/image"
 
 module AllegroApi
 

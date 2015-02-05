@@ -7,6 +7,14 @@ module AllegroApi
     BUY_NOW_PRICE = 8
     COUNTRY = 9
     CITY = 11
+    PHOTO1 = 16
+    PHOTO2 = 17
+    PHOTO3 = 18
+    PHOTO4 = 19
+    PHOTO5 = 20
+    PHOTO6 = 21
+    PHOTO7 = 22
+    PHOTO8 = 23
     INFO = 24
     ZIPCODE = 32
   end
