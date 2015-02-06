@@ -131,7 +131,7 @@ module AllegroApi
 
         case value
           when Integer then api_data[:fvalue_int] = value
-          when Float then api_data[:fvalue_float] = value
+          when Float, BigDecimal then api_data[:fvalue_float] = value
           when String then api_data[:fvalue_string] = value
           when Date then api_data[:fvalue_date] = value.strftime '%d-%m-%Y'
           when Time then api_data[:fvalue_datetime] = value.to_i

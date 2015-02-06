@@ -240,6 +240,7 @@ describe AllegroApi::Auction do
       auction.fields[6] = 1..10
       auction.fields[7] = 2.5..6.9
       auction.fields[8] = Date.new(2014,01,01)..Date.new(2014,12,31)
+      auction.fields[9] = BigDecimal.new "6.66"
       auction.photos << AllegroApi::Image.new(data: image_data)
     end
 
@@ -248,7 +249,7 @@ describe AllegroApi::Auction do
     end
 
     it 'transforms each field to api data' do
-      expect(auction.to_api.size).to eq 9
+      expect(auction.to_api.size).to eq 10
     end
 
     it 'transforms integer values' do
@@ -379,8 +380,24 @@ describe AllegroApi::Auction do
         fvalue_range_date_max: '31-12-2014'} })
     end
 
+    it 'transforms BigDecimal values' do
+      expect(auction.to_api[8]).to eq({ fid: 9,
+        fvalue_string: "",
+        fvalue_int: 0,
+        fvalue_float: 6.66,
+        fvalue_image: '',
+        fvalue_datetime: 0,
+        fvalue_date: '',
+        fvalue_range_int: {fvalue_range_int_min: 0,
+          fvalue_range_int_max: 0},
+        fvalue_range_float: {fvalue_range_float_min: 0,
+          fvalue_range_float_max: 0},
+        fvalue_range_date: {fvalue_range_date_min: '',
+        fvalue_range_date_max: ''} })
+    end
+
     it 'transforms image values' do
-      expect(auction.to_api[8]).to eq({ fid: AllegroApi::Fid::PHOTO1,
+      expect(auction.to_api[9]).to eq({ fid: AllegroApi::Fid::PHOTO1,
         fvalue_string: "",
         fvalue_int: 0,
         fvalue_float: 0,

@@ -16,6 +16,7 @@ module AllegroApi
     PHOTO7 = 22
     PHOTO8 = 23
     INFO = 24
+    SALES_FORMAT = 29
     ZIPCODE = 32
 
     PHOTO_FIELDS = (PHOTO1..PHOTO8).to_a
