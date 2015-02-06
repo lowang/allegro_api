@@ -6,6 +6,7 @@ module AllegroApi
     QUANTITY = 5
     BUY_NOW_PRICE = 8
     COUNTRY = 9
+    STATE = 10
     CITY = 11
     PHOTO1 = 16
     PHOTO2 = 17
