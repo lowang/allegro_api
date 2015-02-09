@@ -154,6 +154,20 @@ describe AllegroApi::Auction do
     end
   end
 
+  describe '#province' do
+    it 'returns value of the PROVINCE field' do
+      auction.fields[AllegroApi::Fid::PROVINCE] = 1
+      expect(auction.province).to eq 1
+    end
+  end
+
+  describe '#province=' do
+    it 'sets value of the PROVINCE field' do
+      auction.province = 2
+      expect(auction.fields[AllegroApi::Fid::PROVINCE]).to eq 2
+    end
+  end
+
   describe 'from_api' do
     let(:data) do
       [

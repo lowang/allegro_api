@@ -112,6 +112,14 @@ module AllegroApi
       self.fields[AllegroApi::Fid::ZIPCODE]
     end
 
+    def province=(value)
+      self.fields[AllegroApi::Fid::PROVINCE] = value
+    end
+
+    def province
+      self.fields[AllegroApi::Fid::PROVINCE]
+    end
+
     private
 
     def field_api_value(fid, value)
