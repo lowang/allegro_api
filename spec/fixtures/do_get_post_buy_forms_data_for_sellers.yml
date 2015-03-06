@@ -1,0 +1,136 @@
+---
+:post_buy_form_id: !ruby/string:Nori::StringWithAttributes
+  str: '431237130'
+  attributes: {}
+:post_buy_form_items:
+  :item:
+    :post_buy_form_it_quantity: !ruby/string:Nori::StringWithAttributes
+      str: '1'
+      attributes: {}
+    :post_buy_form_it_amount: !ruby/string:Nori::StringWithAttributes
+      str: '1899'
+      attributes: {}
+    :post_buy_form_it_id: !ruby/string:Nori::StringWithAttributes
+      str: '5119194000'
+      attributes: {}
+    :post_buy_form_it_title: !ruby/string:Nori::StringWithAttributes
+      str: iphone 5s
+      attributes: {}
+    :post_buy_form_it_country: !ruby/string:Nori::StringWithAttributes
+      str: '1'
+      attributes: {}
+    :post_buy_form_it_price: !ruby/string:Nori::StringWithAttributes
+      str: '1899'
+      attributes: {}
+    :post_buy_form_it_deals:
+      :item:
+        :deal_id: !ruby/string:Nori::StringWithAttributes
+          str: '1180033911'
+          attributes: {}
+        :deal_final_price: !ruby/string:Nori::StringWithAttributes
+          str: '1899'
+          attributes: {}
+        :deal_quantity: !ruby/string:Nori::StringWithAttributes
+          str: '1'
+          attributes: {}
+        :deal_date: !ruby/object:DateTime 2015-03-06 13:54:21.000000000 +01:00
+        :deal_was_discounted: false
+
+:post_buy_form_buyer_id: !ruby/string:Nori::StringWithAttributes
+  str: '413691'
+  attributes: {}
+:post_buy_form_amount: !ruby/string:Nori::StringWithAttributes
+  str: '1924'
+  attributes: {}
+:post_buy_form_postage_amount: !ruby/string:Nori::StringWithAttributes
+  str: '25'
+  attributes: {}
+:post_buy_form_invoice_option: !ruby/string:Nori::StringWithAttributes
+  str: '0'
+  attributes: {}
+:post_buy_form_msg_to_seller: 
+:post_buy_form_invoice_data:
+  :post_buy_form_adr_country: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :post_buy_form_adr_street: 
+  :post_buy_form_adr_postcode: 
+  :post_buy_form_adr_city: 
+  :post_buy_form_adr_full_name: 
+  :post_buy_form_adr_company: 
+  :post_buy_form_adr_phone: 
+  :post_buy_form_adr_nip: 
+  :post_buy_form_created_date: 
+  :post_buy_form_adr_type: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+:post_buy_form_shipment_address:
+  :post_buy_form_adr_country: !ruby/string:Nori::StringWithAttributes
+    str: '1'
+    attributes: {}
+  :post_buy_form_adr_street: !ruby/string:Nori::StringWithAttributes
+    str: Marcelinskaya 90
+    attributes: {}
+  :post_buy_form_adr_postcode: !ruby/string:Nori::StringWithAttributes
+    str: 11-111
+    attributes: {}
+  :post_buy_form_adr_city: !ruby/string:Nori::StringWithAttributes
+    str: Warszawa
+    attributes: {}
+  :post_buy_form_adr_full_name: !ruby/string:Nori::StringWithAttributes
+    str: Jan Kwiatkoski
+    attributes: {}
+  :post_buy_form_adr_company: u Janusza
+  :post_buy_form_adr_phone: !ruby/string:Nori::StringWithAttributes
+    str: "+381111111111"
+    attributes: {}
+  :post_buy_form_adr_nip: 
+  :post_buy_form_created_date: !ruby/string:Nori::StringWithAttributes
+    str: '2015-03-06 13:54:41'
+    attributes: {}
+  :post_buy_form_adr_type: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+:post_buy_form_pay_type: !ruby/string:Nori::StringWithAttributes
+  str: collect_on_delivery
+  attributes: {}
+:post_buy_form_pay_id: !ruby/string:Nori::StringWithAttributes
+  str: '0'
+  attributes: {}
+:post_buy_form_pay_status: 
+:post_buy_form_date_init: 
+:post_buy_form_date_recv: 
+:post_buy_form_date_cancel: 
+:post_buy_form_shipment_id: !ruby/string:Nori::StringWithAttributes
+  str: '11'
+  attributes: {}
+:post_buy_form_gd_address:
+  :post_buy_form_adr_country: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :post_buy_form_adr_street: 
+  :post_buy_form_adr_postcode: 
+  :post_buy_form_adr_city: 
+  :post_buy_form_adr_full_name: 
+  :post_buy_form_adr_company: 
+  :post_buy_form_adr_phone: 
+  :post_buy_form_adr_nip: 
+  :post_buy_form_created_date: 
+  :post_buy_form_adr_type: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+:post_buy_form_shipment_tracking: 
+:post_buy_form_surcharges_list: 
+:post_buy_form_gd_additional_info: 
+:post_buy_form_payment_amount: !ruby/string:Nori::StringWithAttributes
+  str: '0'
+  attributes: {}
+:post_buy_form_sent_by_seller: !ruby/string:Nori::StringWithAttributes
+  str: '0'
+  attributes: {}
+:post_buy_form_buyer_login: !ruby/string:Nori::StringWithAttributes
+  str: januszzallegro
+  attributes: {}
+:post_buy_form_buyer_email: !ruby/string:Nori::StringWithAttributes
+  str: janusz@buziaczek.pl
+  attributes: {}

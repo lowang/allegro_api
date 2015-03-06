@@ -13,6 +13,8 @@ module AllegroApi
     attr_accessor :watchers_count
     attr_accessor :views_count
 
+    attr_accessor :deals, :amount
+
 
     def self.from_api(data)
       item = new

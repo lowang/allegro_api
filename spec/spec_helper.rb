@@ -1,4 +1,5 @@
 require 'webmock/rspec'
+require 'pry'
 require_relative './helpers'
 require_relative '../lib/allegro_api'
 
@@ -79,4 +80,16 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+unless AllegroApi.respond_to? :root
+  AllegroApi.module_exec do
+    def self.root=(val)
+      @root = val
+    end
+    def self.root
+      @root
+    end
+  end
+  AllegroApi.root = File.realpath(File.join(File.dirname(__FILE__), '..'))
 end

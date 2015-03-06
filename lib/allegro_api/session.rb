@@ -25,25 +25,38 @@ module AllegroApi
       {id: response[:item_id].to_i, cost: response[:item_info].sub(',', '.').to_f}
     end
 
-    def get_sell_items
-      response = @client.call(:do_get_my_sell_items, session_id: id)[:do_get_my_sell_items_response][:sell_items_list]
+    # type: sell|sold|not_sold|won
+    def get_items(type)
+      response = @client.call(:"do_get_my_#{type}_items", session_id: id)[:"do_get_my_#{type}_items_response"][:"#{type}_items_list"]
       process_items_response(response)
     end
 
-    def get_sold_items
-      response = @client.call(:do_get_my_sold_items, session_id: id)[:do_get_my_sold_items_response][:sold_items_list]
-      process_items_response(response)
+    def get_counterparty_data(items_ids)
+      items_ids = Array.wrap(items_ids)
+      response = @client.call(:do_get_post_buy_data, session_handle: id, items_array: {item: items_ids})[:do_get_post_buy_data_response][:items_post_buy_data]
+      Hash[*response[:item].map do |item|
+        [item[:item_id], item[:users_post_buy_data][:item]]
+      end.flatten]
     end
 
-    def get_not_sold_items
-      response = @client.call(:do_get_my_not_sold_items, session_id: id)[:do_get_my_not_sold_items_response][:not_sold_items_list]
-      process_items_response(response)
+    # type: seller|buyer
+    def get_transaction_details(transactions_ids, type='seller')
+      transactions_ids = Array.wrap(transactions_ids)
+      response = @client.call(:"do_get_post_buy_forms_data_for_#{type}s", session_id: id, transactionsIdsArray: {item: transactions_ids})
+      data = response[:"do_get_post_buy_forms_data_for_#{type}s_response"][:"post_buy_form_data"][:item]
+      AllegroApi::Transaction.from_api(data)
     end
 
+    # type: seller|buyer
+    def get_transactions(items_ids, type='seller')
+      items_ids = Array.wrap(items_ids)
+      response = @client.call(:do_get_transactions_i_ds, session_handle: id, items_id_array: {item: items_ids}, user_role: type)
+      Array.wrap(response[:do_get_transactions_i_ds_response][:transactions_ids_array].try(:[],:item))
+    end
 
     def auctions
       Enumerator.new do |collection|
-        get_sell_items.each do |item|
+        get_items('sell').each do |item|
           collection << find_auction(item.id)
         end
       end

@@ -19,12 +19,16 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
 
-  spec.add_dependency "savon", "~> 2.7.0"
+  #spec.add_dependency "savon", "~> 2.7.0"
+  #gem 'wasabi', github: 'savonrb/wasabi', tag: 'v3.3.0'
+  #gem 'savon',  github: 'savonrb/savon'
 
   spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "savon", "~> 2.7.0"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'terminal-notifier-guard'
+  spec.add_development_dependency 'pry'
 end
