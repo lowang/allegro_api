@@ -24,6 +24,17 @@ module AllegroApi
       auction
     end
 
+    def self.field_accessor(name, field_id)
+      self.class_eval %Q{
+        def #{name}=(value)
+          self.fields[#{field_id}] = value
+        end
+
+        def #{name}
+          self.fields[#{field_id}]
+        end
+      }
+    end
 
     def to_api
       api_data = []
@@ -39,86 +50,19 @@ module AllegroApi
       api_data
     end
 
-    def name=(value)
-      self.fields[AllegroApi::Fid::NAME] = value
-    end
-
-    def name
-      self.fields[AllegroApi::Fid::NAME]
-    end
-
-    def category_id=(value)
-      self.fields[AllegroApi::Fid::CATEGORY] = value
-    end
-
-    def category_id
-      self.fields[AllegroApi::Fid::CATEGORY]
-    end
-
-    def duration=(value)
-      self.fields[AllegroApi::Fid::DURATION] = value
-    end
-
-    def duration
-      self.fields[AllegroApi::Fid::DURATION]
-    end
-
-
-    def quantity=(value)
-      self.fields[AllegroApi::Fid::QUANTITY] = value
-    end
-
-    def quantity
-      self.fields[AllegroApi::Fid::QUANTITY]
-    end
-
-    def price=(value)
-      self.fields[AllegroApi::Fid::BUY_NOW_PRICE] = value
-    end
-
-    def price
-      self.fields[AllegroApi::Fid::BUY_NOW_PRICE]
-    end
-
-    def country=(value)
-      self.fields[AllegroApi::Fid::COUNTRY] = value
-    end
-
-    def country
-      self.fields[AllegroApi::Fid::COUNTRY]
-    end
-
-    def city=(value)
-      self.fields[AllegroApi::Fid::CITY] = value
-    end
-
-    def city
-      self.fields[AllegroApi::Fid::CITY]
-    end
-
-    def info=(value)
-      self.fields[AllegroApi::Fid::INFO] = value
-    end
-
-    def info
-      self.fields[AllegroApi::Fid::INFO]
-    end
-
-    def zipcode=(value)
-      self.fields[AllegroApi::Fid::ZIPCODE] = value
-    end
-
-    def zipcode
-      self.fields[AllegroApi::Fid::ZIPCODE]
-    end
-
-    def province=(value)
-      self.fields[AllegroApi::Fid::PROVINCE] = value
-    end
-
-    def province
-      self.fields[AllegroApi::Fid::PROVINCE]
-    end
+    field_accessor :name, AllegroApi::Fid::NAME
+    field_accessor :category_id, AllegroApi::Fid::CATEGORY
+    field_accessor :duration, AllegroApi::Fid::DURATION
+    field_accessor :quantity, AllegroApi::Fid::QUANTITY
+    field_accessor :quantity_type, AllegroApi::Fid::QUANTITY_TYPE
+    field_accessor :promo_options, AllegroApi::Fid::PROMO_OPTIONS
+    field_accessor :bank_account, AllegroApi::Fid::BANK_ACCOUNT_1
+    field_accessor :price, AllegroApi::Fid::BUY_NOW_PRICE
+    field_accessor :country, AllegroApi::Fid::COUNTRY
+    field_accessor :city, AllegroApi::Fid::CITY
+    field_accessor :info, AllegroApi::Fid::INFO
+    field_accessor :zipcode, AllegroApi::Fid::ZIPCODE
+    field_accessor :province, AllegroApi::Fid::PROVINCE
 
     private
 
