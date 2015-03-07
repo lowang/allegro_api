@@ -81,5 +81,9 @@ module AllegroApi
         Category.from_api(response)
       end
     end
+
+    def self.encode_password(password)
+      Base64.strict_encode64(Digest::SHA256.new.digest(password))
+    end
   end
 end
