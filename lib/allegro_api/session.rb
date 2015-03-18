@@ -17,7 +17,8 @@ module AllegroApi
     end
 
     def check_auction(auction)
-      @client.call :do_check_new_auction_ext, session_handle: id, fields: {item: auction.to_api}
+      response = @client.call(:do_check_new_auction_ext, session_handle: id, fields: {item: auction.to_api})[:do_check_new_auction_ext_response]
+       {cost: response[:item_price].sub(',', '.').to_f, description: response[:item_price_desc]}
     end
 
     def create_auction(auction)
