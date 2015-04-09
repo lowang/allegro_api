@@ -62,6 +62,10 @@ module AllegroApi
       end
     end
 
+    def get_user_items
+      client.get_user_items(user_id)
+    end
+
     private
 
     def process_items_response(response)
