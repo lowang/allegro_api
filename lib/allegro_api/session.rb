@@ -63,7 +63,12 @@ module AllegroApi
     end
 
     def get_user_items
-      client.get_user_items(user_id)
+      @client.get_user_items(user_id)
+    end
+
+    def find_user_items(user_id, phrase)
+      response = @client.call(:do_search, sessionHandle: id, searchQuery: {searchString: phrase, searchUser: user_id} )
+      Array.wrap(response[:do_search_response][:search_array].try(:[],:item))
     end
 
     private

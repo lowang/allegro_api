@@ -90,8 +90,8 @@ module AllegroApi
     def get_user_items(user_id)
       response = call(:"do_get_items_list", webapi_key: webapi_key, countryId: country_code,
         filterOptions:[{item: {filterId:"userId", filterValueId:[{item: user_id}]}}],
-        resultSize: 1000)
-      Array.wrap(response[:do_get_items_list_response][:items_list][:item])
+        resultSize: 100)
+      Array.wrap(response[:do_get_items_list_response][:items_list].try(:[],:item))
     end
 
     def self.encode_password(password)
