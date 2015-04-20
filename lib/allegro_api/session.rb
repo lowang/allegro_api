@@ -4,6 +4,10 @@ module AllegroApi
     attr_reader :user_id
     attr_reader :id
 
+    #
+    GET_ITEM_PAGE_SIZE = 100
+
+
     def initialize(client, id, user_id)
       @client = client
       @id = id
@@ -50,6 +54,10 @@ module AllegroApi
     end
 
     private
+
+    def get_items_page(item_type, page, request_params)
+
+    end
 
     def build_get_items_params(items_ids)
       params = {session_id: id}
