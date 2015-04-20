@@ -26,21 +26,20 @@ module AllegroApi
       {id: response[:item_id].to_i, cost: response[:item_info].sub(',', '.').to_f}
     end
 
-    def get_sell_items
-      response = @client.call(:do_get_my_sell_items, session_id: id)[:do_get_my_sell_items_response][:sell_items_list]
+    def get_sell_items(*items_ids)
+      response = @client.call(:do_get_my_sell_items, build_get_items_params(items_ids))[:do_get_my_sell_items_response][:sell_items_list]
       process_items_response(response)
     end
 
-    def get_sold_items
-      response = @client.call(:do_get_my_sold_items, session_id: id)[:do_get_my_sold_items_response][:sold_items_list]
+    def get_sold_items(*items_ids)
+      response = @client.call(:do_get_my_sold_items, build_get_items_params(items_ids))[:do_get_my_sold_items_response][:sold_items_list]
       process_items_response(response)
     end
 
-    def get_not_sold_items
-      response = @client.call(:do_get_my_not_sold_items, session_id: id)[:do_get_my_not_sold_items_response][:not_sold_items_list]
+    def get_not_sold_items(*items_ids)
+      response = @client.call(:do_get_my_not_sold_items, build_get_items_params(items_ids))[:do_get_my_not_sold_items_response][:not_sold_items_list]
       process_items_response(response)
     end
-
 
     def auctions
       Enumerator.new do |collection|
@@ -51,6 +50,12 @@ module AllegroApi
     end
 
     private
+
+    def build_get_items_params(items_ids)
+      params = {session_id: id}
+      params[:item_ids] = {item: items_ids} unless items_ids.empty?
+      params
+    end
 
     def process_items_response(response)
       return [] unless response && response[:item]

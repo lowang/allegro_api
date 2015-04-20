@@ -24,6 +24,13 @@ describe AllegroApi::Session do
       session.get_sell_items
     end
 
+    it 'respects list of items ids provided' do
+      expect(client).to receive(:call).with(:do_get_my_sell_items,
+        session_id: 1234, item_ids: {item: [1,2,3,4]}).and_return(
+          {do_get_my_sell_items_response: {sell_items_list: {item: []}}})
+      session.get_sell_items(1,2,3,4)
+    end
+
     describe 'on success' do
       let(:items) { session.get_sell_items }
 
@@ -48,6 +55,13 @@ describe AllegroApi::Session do
       session.get_sold_items
     end
 
+    it 'respects list of items ids provided' do
+      expect(client).to receive(:call).with(:do_get_my_sold_items,
+        session_id: 1234, item_ids: {item: [1,2,3,4]}).and_return(
+          {do_get_my_sold_items_response: {sold_items_list: {item: []}}})
+      session.get_sold_items(1,2,3,4)
+    end
+
     describe 'on success' do
       let(:items) { session.get_sold_items }
 
@@ -70,6 +84,13 @@ describe AllegroApi::Session do
         session_id: 1234).and_return(
           {do_get_my_not_sold_items_response: {not_sold_items_list: {item: []}}})
       session.get_not_sold_items
+    end
+
+    it 'respects list of items ids provided' do
+      expect(client).to receive(:call).with(:do_get_my_not_sold_items,
+        session_id: 1234, item_ids: {item: [1,2,3,4]}).and_return(
+          {do_get_my_not_sold_items_response: {not_sold_items_list: {item: []}}})
+          session.get_not_sold_items(1,2,3,4)
     end
 
     describe 'on success' do
