@@ -4,8 +4,8 @@ module AllegroApi
     attr_reader :user_id
     attr_reader :id
 
-    #
-    GET_ITEM_PAGE_SIZE = 100
+    # number of items per page in get_*_items requests
+    GET_ITEMS_PAGE_SIZE = 100
 
 
     def initialize(client, id, user_id)
@@ -30,19 +30,27 @@ module AllegroApi
       {id: response[:item_id].to_i, cost: response[:item_info].sub(',', '.').to_f}
     end
 
+    def get_items(item_type, *items_ids)
+      counter, items = get_items_page(0, item_type, items_ids)
+      if counter > GET_ITEMS_PAGE_SIZE
+        items = (1...(counter / GET_ITEMS_PAGE_SIZE + 1)).inject(items) do |memo, page|
+          _, page_items = get_items_page(page, item_type, items_ids)
+          memo + page_items
+        end
+      end
+      items
+    end
+
     def get_sell_items(*items_ids)
-      response = @client.call(:do_get_my_sell_items, build_get_items_params(items_ids))[:do_get_my_sell_items_response][:sell_items_list]
-      process_items_response(response)
+      get_items(:sell_items, *items_ids)
     end
 
     def get_sold_items(*items_ids)
-      response = @client.call(:do_get_my_sold_items, build_get_items_params(items_ids))[:do_get_my_sold_items_response][:sold_items_list]
-      process_items_response(response)
+      get_items(:sold_items, *items_ids)
     end
 
     def get_not_sold_items(*items_ids)
-      response = @client.call(:do_get_my_not_sold_items, build_get_items_params(items_ids))[:do_get_my_not_sold_items_response][:not_sold_items_list]
-      process_items_response(response)
+      get_items(:not_sold_items, *items_ids)
     end
 
     def auctions
@@ -53,14 +61,21 @@ module AllegroApi
       end
     end
 
+
     private
 
-    def get_items_page(item_type, page, request_params)
-
+    def get_items_page(page, item_type, items_ids)
+      response = @client.call("do_get_my_#{item_type}".to_sym, build_get_items_params(items_ids, page))
+      response_name = "do_get_my_#{item_type}_response".to_sym
+      all_items_count = response[response_name]["#{item_type}_counter".to_sym].to_i
+      items = process_items_response(response[response_name]["#{item_type}_list".to_sym])
+      return [all_items_count, items]
     end
 
-    def build_get_items_params(items_ids)
+    def build_get_items_params(items_ids, page = 0)
       params = {session_id: id}
+      params[:page_size] = GET_ITEMS_PAGE_SIZE
+      params[:page] = page
       params[:item_ids] = {item: items_ids} unless items_ids.empty?
       params
     end

@@ -8,6 +8,10 @@ describe AllegroApi::Session do
   let(:client) { AllegroApi::Client.new wsdl: wsdl_url }
   let(:session) { AllegroApi::Session.new(client, session_id, user_id) }
 
+  let(:get_items_params) do
+    {session_id: 1234, page_size: 100, page: 0}
+  end
+
   it 'provides session id' do
     expect(session.id).to eq session_id
   end
@@ -16,23 +20,61 @@ describe AllegroApi::Session do
     expect(session.user_id).to eq user_id
   end
 
-  describe '#get_sell_items' do
-    it 'invokes doGetMySellItems SOAP request' do
-      expect(client).to receive(:call).with(:do_get_my_sell_items,
-        session_id: 1234).and_return(
-          {do_get_my_sell_items_response: {sell_items_list: {item: []}}})
-      session.get_sell_items
+  describe '#get_items' do
+    let(:api_response) do
+      {do_get_my_sell_items_response: {sell_items_counter: "0", sell_items_list: {item: []}}}
+    end
+
+    it 'invokes correct SOAP request for given item_type' do
+      expect(client).to receive(:call).with(:do_get_my_sell_items, get_items_params).and_return(api_response)
+      session.get_items(:sell_items)
     end
 
     it 'respects list of items ids provided' do
-      expect(client).to receive(:call).with(:do_get_my_sell_items,
-        session_id: 1234, item_ids: {item: [1,2,3,4]}).and_return(
-          {do_get_my_sell_items_response: {sell_items_list: {item: []}}})
-      session.get_sell_items(1,2,3,4)
+      get_items_params[:item_ids] = {item: [1, 2, 3, 4]}
+      expect(client).to receive(:call).with(:do_get_my_sell_items, get_items_params).and_return(api_response)
+      session.get_items(:sell_items, 1, 2, 3, 4)
     end
 
-    describe 'on success' do
-      let(:items) { session.get_sell_items }
+    context 'when number of items exceeds one page' do
+      let(:second_page_params) do
+        {session_id: 1234, page_size: 100, page: 0}
+      end
+
+      let(:api_response) do
+        {do_get_my_sell_items_response: {sell_items_counter: "101", sell_items_list: {item: [
+          {item_id: "4762577271", item_title: "inny test", item_thumbnail_url: nil, item_price: {item: {price_type: "1", price_value: "5.55"}},
+            item_start_quantity: "2", item_sold_quantity: "0", item_quantity_type: "1", item_start_time: "1420216922",
+            item_end_time: "1421080922", item_end_time_left: "9 dni", item_bidders_counter: "0",
+            item_highest_bidder: {user_id: "0", user_login: nil, user_rating: "0", user_icons: "0", user_country: "0"},
+            item_category_id: "101360", item_watchers_counter: "0", item_views_counter: "0", item_note: nil, item_special_info: "0",
+            item_shop_info: "0", item_product_info: "0", item_payu_info: "0", item_duration_info: {duration_type: "1"}},
+          {item_id: "4762570616", item_title: "sdsdsdsd", item_thumbnail_url: nil, item_price: {item: {price_type: "1", price_value: "10"}},
+            item_start_quantity: "1", item_sold_quantity: "0", item_quantity_type: "1", item_start_time: "1420211678", item_end_time: "1422803678",
+            item_end_time_left: "29 dni", item_bidders_counter: "0", item_highest_bidder: {user_id: "0", user_login: nil, user_rating: "0",
+            user_icons: "0", user_country: "0"}, item_category_id: "101368", item_watchers_counter: "0", item_views_counter: "2", item_note: nil,
+            item_special_info: "0", item_shop_info: "0", item_product_info: "0", item_payu_info: "0", item_duration_info: {duration_type: "1"}}
+        ]}}}
+      end
+
+      before do
+        api_response[:do_get_my_sell_items_response][:sell_items_counter] = "101"
+        allow(client).to receive(:call).and_return(api_response)
+      end
+
+      it 'retrives all pages' do
+        expect(client).to receive(:call).with(:do_get_my_sell_items, second_page_params)
+        session.get_items(:sell_items)
+      end
+
+      it 'concatenates items from all pages' do
+        expect(session.get_items(:sell_items).size).to eq 4
+      end
+    end
+
+
+    context 'on success' do
+      let(:items) { session.get_items(:sell_items) }
 
       before :each do
         stub_wsdl_request_for wsdl_url
@@ -47,64 +89,44 @@ describe AllegroApi::Session do
     end
   end
 
+  describe '#get_sell_items' do
+    it 'invokes get_items with sell_items' do
+      expect(session).to receive(:get_items).with(:sell_items)
+      session.get_sell_items
+    end
+
+    context 'for list of items' do
+      it 'invokes get_items with sell_items aand list of items' do
+        expect(session).to receive(:get_items).with(:sell_items, 1,2,3)
+        session.get_sell_items(1,2,3)
+      end
+    end
+  end
+
   describe '#get_sold_items' do
-    it 'invokes doGetMySellItems SOAP request' do
-      expect(client).to receive(:call).with(:do_get_my_sold_items,
-        session_id: 1234).and_return(
-          {do_get_my_sold_items_response: {sold_items_list: {item: []}}})
+    it 'invokes get_items with sell_items' do
+      expect(session).to receive(:get_items).with(:sold_items)
       session.get_sold_items
     end
 
-    it 'respects list of items ids provided' do
-      expect(client).to receive(:call).with(:do_get_my_sold_items,
-        session_id: 1234, item_ids: {item: [1,2,3,4]}).and_return(
-          {do_get_my_sold_items_response: {sold_items_list: {item: []}}})
-      session.get_sold_items(1,2,3,4)
-    end
-
-    describe 'on success' do
-      let(:items) { session.get_sold_items }
-
-      before :each do
-        stub_wsdl_request_for wsdl_url
-        stub_api_response_with 'do_get_my_sold_items_success'
-      end
-
-      it 'returns an array of items' do
-        expect(items).to be_instance_of Array
-        expect(items.size).to eq 2
-        expect(items).to all(be_instance_of AllegroApi::Item)
+    context 'for list of items' do
+      it 'invokes get_items with sell_items aand list of items' do
+        expect(session).to receive(:get_items).with(:sold_items, 1,2,3)
+        session.get_sold_items(1,2,3)
       end
     end
   end
 
   describe '#get_not_sold_items' do
-    it 'invokes doGetMySellItems SOAP request' do
-      expect(client).to receive(:call).with(:do_get_my_not_sold_items,
-        session_id: 1234).and_return(
-          {do_get_my_not_sold_items_response: {not_sold_items_list: {item: []}}})
+    it 'invokes get_items with sell_items' do
+      expect(session).to receive(:get_items).with(:not_sold_items)
       session.get_not_sold_items
     end
 
-    it 'respects list of items ids provided' do
-      expect(client).to receive(:call).with(:do_get_my_not_sold_items,
-        session_id: 1234, item_ids: {item: [1,2,3,4]}).and_return(
-          {do_get_my_not_sold_items_response: {not_sold_items_list: {item: []}}})
-          session.get_not_sold_items(1,2,3,4)
-    end
-
-    describe 'on success' do
-      let(:items) { session.get_not_sold_items }
-
-      before :each do
-        stub_wsdl_request_for wsdl_url
-        stub_api_response_with 'do_get_my_not_sold_items_success'
-      end
-
-      it 'returns an array of items' do
-        expect(items).to be_instance_of Array
-        expect(items.size).to eq 2
-        expect(items).to all(be_instance_of AllegroApi::Item)
+    context 'for list of items' do
+      it 'invokes get_items with sell_items aand list of items' do
+        expect(session).to receive(:get_items).with(:not_sold_items, 1,2,3)
+        session.get_not_sold_items(1,2,3)
       end
     end
   end
@@ -117,7 +139,7 @@ describe AllegroApi::Session do
       session.find_auction(4567)
     end
 
-    describe 'on success' do
+    context 'on success' do
       before :each do
         stub_wsdl_request_for wsdl_url
         stub_api_response_with 'do_get_item_fields_success'
@@ -166,7 +188,7 @@ describe AllegroApi::Session do
       session.create_auction(auction)
     end
 
-    describe 'on success' do
+    context 'on success' do
       before :each do
         stub_wsdl_request_for wsdl_url
         stub_api_response_with 'do_new_auction_ext'
