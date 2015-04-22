@@ -75,7 +75,7 @@ module AllegroApi
     def build_get_items_params(items_ids, page = 0)
       params = {session_id: id}
       params[:page_size] = GET_ITEMS_PAGE_SIZE
-      params[:page] = page
+      params[:page_number] = page
       params[:item_ids] = {item: items_ids} unless items_ids.empty?
       params
     end

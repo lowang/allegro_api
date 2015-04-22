@@ -9,7 +9,7 @@ describe AllegroApi::Session do
   let(:session) { AllegroApi::Session.new(client, session_id, user_id) }
 
   let(:get_items_params) do
-    {session_id: 1234, page_size: 100, page: 0}
+    {session_id: 1234, page_size: 100, page_number: 0}
   end
 
   it 'provides session id' do
@@ -38,7 +38,7 @@ describe AllegroApi::Session do
 
     context 'when number of items exceeds one page' do
       let(:second_page_params) do
-        {session_id: 1234, page_size: 100, page: 0}
+        {session_id: 1234, page_size: 100, page_number: 0}
       end
 
       let(:api_response) do
