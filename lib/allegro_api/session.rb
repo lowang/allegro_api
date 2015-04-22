@@ -31,14 +31,11 @@ module AllegroApi
     end
 
     def get_items(item_type, *items_ids)
-      counter, items = get_items_page(0, item_type, items_ids)
-      if counter > GET_ITEMS_PAGE_SIZE
-        items = (1...(counter / GET_ITEMS_PAGE_SIZE + 1)).inject(items) do |memo, page|
-          _, page_items = get_items_page(page, item_type, items_ids)
-          memo + page_items
-        end
+      if items_ids.empty?
+        get_items_in_pages(item_type)
+      else
+        get_items_by_id(item_type, items_ids)
       end
-      items
     end
 
     def get_sell_items(*items_ids)
@@ -64,8 +61,37 @@ module AllegroApi
 
     private
 
-    def get_items_page(page, item_type, items_ids)
-      response = @client.call("do_get_my_#{item_type}".to_sym, build_get_items_params(items_ids, page))
+    def get_items_by_id(item_type, items_ids)
+      items = []
+      request_name = "do_get_my_#{item_type}".to_sym
+      response_name = "do_get_my_#{item_type}_response".to_sym
+      items_list_name = "#{item_type}_list".to_sym
+      items_ids.each_slice(GET_ITEMS_PAGE_SIZE) do |batch_ids|
+        response = @client.call(request_name, session_id: id,
+          item_ids: {item: batch_ids})
+        items += process_items_response(response[response_name][items_list_name])
+      end
+      items
+    end
+
+    def get_items_batch()
+
+    end
+
+    def get_items_in_pages(item_type)
+      counter, items = get_items_page(0, item_type)
+      if counter > GET_ITEMS_PAGE_SIZE
+        items = (1...(counter / GET_ITEMS_PAGE_SIZE + 1)).inject(items) do |memo, page|
+          _, page_items = get_items_page(page, item_type)
+          memo + page_items
+        end
+      end
+      items
+    end
+
+    def get_items_page(page, item_type)
+      response = @client.call("do_get_my_#{item_type}".to_sym, session_id: id,
+        page_size: GET_ITEMS_PAGE_SIZE, page_number: page)
       response_name = "do_get_my_#{item_type}_response".to_sym
       all_items_count = response[response_name]["#{item_type}_counter".to_sym].to_i
       items = process_items_response(response[response_name]["#{item_type}_list".to_sym])

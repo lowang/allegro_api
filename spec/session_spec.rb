@@ -26,13 +26,14 @@ describe AllegroApi::Session do
     end
 
     it 'invokes correct SOAP request for given item_type' do
-      expect(client).to receive(:call).with(:do_get_my_sell_items, get_items_params).and_return(api_response)
+      expect(client).to receive(:call).with(:do_get_my_sell_items, session_id: session_id,
+        page_size: 100, page_number: 0).and_return(api_response)
       session.get_items(:sell_items)
     end
 
     it 'respects list of items ids provided' do
-      get_items_params[:item_ids] = {item: [1, 2, 3, 4]}
-      expect(client).to receive(:call).with(:do_get_my_sell_items, get_items_params).and_return(api_response)
+      expect(client).to receive(:call).with(:do_get_my_sell_items, session_id: session_id,
+        item_ids: {item: [1, 2, 3, 4]}).and_return(api_response)
       session.get_items(:sell_items, 1, 2, 3, 4)
     end
 
