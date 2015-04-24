@@ -237,4 +237,103 @@ describe AllegroApi::Session do
       end
     end
   end
+
+  describe '#get_site_journal_events' do
+    context 'without specifying start point' do
+      it 'invokes doGetSiteJournal SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal, session_handle: 1234).and_return(
+            {do_get_site_journal_response: {site_journal_array: {item: []}}})
+        session.get_site_journal_events
+      end
+    end
+
+    context 'with starting point' do
+      it 'invokes doGetSiteJournal SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal, session_handle: 1234,
+          starting_point: 4321).and_return(
+            {do_get_site_journal_response: {site_journal_array: {item: []}}})
+        session.get_site_journal_events(4321)
+      end
+    end
+
+    context 'on success' do
+      let(:events) { session.get_site_journal_events }
+
+      before :each do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_get_site_journal_success'
+      end
+
+      it 'returns an array of journal events' do
+        expect(events).to be_instance_of Array
+        expect(events.size).to eq 5
+        expect(events).to all(be_instance_of AllegroApi::JournalEvent)
+      end
+    end
+
+    context 'on success without events' do
+      let(:events) { session.get_site_journal_events }
+
+      before :each do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_get_site_journal_no_events'
+      end
+
+      it 'returns an empty array' do
+        expect(events).to be_instance_of Array
+        expect(events.size).to eq 0
+      end
+    end
+  end
+
+  describe '#count_site_journal_events' do
+    context 'without specifying start point' do
+      it 'invokes doGetSiteJournalInfo SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal_info, session_handle: 1234).and_return(
+          {do_get_site_journal_info_response: {site_journal_info: {items_number: 0, last_item_date: 0}}})
+        session.count_site_journal_events
+      end
+    end
+
+    context 'with starting point' do
+      it 'invokes doGetSiteJournalInfo SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal_info, session_handle: 1234,
+          starting_point: 4321).and_return(
+            {do_get_site_journal_info_response: {site_journal_info: {items_number: 0, last_item_date: 0}}})
+        session.count_site_journal_events(4321)
+      end
+    end
+
+    context 'on success' do
+      let(:events_count) { session.count_site_journal_events }
+
+      before :each do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_get_site_journal_info_success'
+      end
+
+      it 'returns the number of events' do
+        expect(events_count).to eq 5
+      end
+    end
+  end
+
+  describe '#for_each_site_journal_events_page' do
+    let(:journal_events) do
+      [ AllegroApi::JournalEvent.new ] * 4
+    end
+
+    let(:in_block_code) { double }
+
+    before do
+      allow(session).to receive(:count_site_journal_events).and_return(8)
+      allow(session).to receive(:get_site_journal_events).and_return(journal_events)
+    end
+
+    it 'performs code of the block for each page of events' do
+      expect(in_block_code).to receive(:call).with(journal_events).twice
+      session.for_each_site_journal_events_page {|page| in_block_code.call(page) }
+    end
+
+  end
 end

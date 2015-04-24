@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Vary: Accept-Encoding
+Set-Cookie: ws2=61ba1a988d2d10e2dc60b41608ea3afc; expires=Thu, 23-Apr-2015 13:19:50 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws3=Nab48140f2776a80f0d945623be4015a1; expires=Wed, 15-Nov-2113 12:49:50 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws4=x; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: TEST_QXLSESSID=06a2421e2f97be77fe7d0b212278565ce6efbca00bcc68me00; path=/; domain=.allegro.pl.webapisandbox.pl
+Cache-Control: private
+Pragma: no-cache
+Content-Type: text/xml; charset=utf-8
+X-Backend: allegro_qeppo
+Content-Length: 1542
+Accept-Ranges: bytes
+Date: Thu, 23 Apr 2015 12:49:50 GMT
+Age: 0
+Connection: keep-alive
+X-Hit: HIT 0
+X-Origin: vte29-frontend-vte01
+X-Frame-Options: SAMEORIGIN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:SandboxWebApi"><SOAP-ENV:Body><ns1:doGetSiteJournalResponse><ns1:siteJournalArray><ns1:item><ns1:rowId>14367</ns1:rowId><ns1:itemId>5149174698</ns1:itemId><ns1:changeType>end</ns1:changeType><ns1:changeDate>1429370627</ns1:changeDate><ns1:currentPrice>0</ns1:currentPrice><ns1:itemSellerId>42011575</ns1:itemSellerId></ns1:item><ns1:item><ns1:rowId>17799</ns1:rowId><ns1:itemId>5149167058</ns1:itemId><ns1:changeType>start</ns1:changeType><ns1:changeDate>1429696240</ns1:changeDate><ns1:currentPrice>0</ns1:currentPrice><ns1:itemSellerId>42011575</ns1:itemSellerId></ns1:item><ns1:item><ns1:rowId>18164</ns1:rowId><ns1:itemId>5149167058</ns1:itemId><ns1:changeType>change</ns1:changeType><ns1:changeDate>1429702662</ns1:changeDate><ns1:currentPrice>0</ns1:currentPrice><ns1:itemSellerId>42011575</ns1:itemSellerId></ns1:item><ns1:item><ns1:rowId>18165</ns1:rowId><ns1:itemId>5149167058</ns1:itemId><ns1:changeType>end</ns1:changeType><ns1:changeDate>1429702666</ns1:changeDate><ns1:currentPrice>0</ns1:currentPrice><ns1:itemSellerId>42011575</ns1:itemSellerId></ns1:item><ns1:item><ns1:rowId>18717</ns1:rowId><ns1:itemId>5149176353</ns1:itemId><ns1:changeType>start</ns1:changeType><ns1:changeDate>1429718065</ns1:changeDate><ns1:currentPrice>0</ns1:currentPrice><ns1:itemSellerId>42011575</ns1:itemSellerId></ns1:item></ns1:siteJournalArray></ns1:doGetSiteJournalResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>

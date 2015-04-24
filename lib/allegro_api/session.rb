@@ -59,6 +59,35 @@ module AllegroApi
     end
 
 
+    def get_site_journal_events(starting_point = nil)
+      params = { session_handle: id }
+      params[:starting_point] = starting_point if starting_point
+      response = @client.call(:do_get_site_journal, params)[:do_get_site_journal_response][:site_journal_array]
+      if response && response[:item]
+        response[:item].map {|api_data| JournalEvent.from_api(api_data)}
+      else
+        []
+      end
+    end
+
+    def count_site_journal_events(starting_point = nil)
+      params = { session_handle: id }
+      params[:starting_point] = starting_point if starting_point
+      response = @client.call(:do_get_site_journal_info, params)[:do_get_site_journal_info_response][:site_journal_info]
+      response[:items_number].to_i
+    end
+
+
+    def for_each_site_journal_events_page(starting_point = nil, &block)
+      events_counter = count_site_journal_events(starting_point)
+      while(events_counter > 0)
+        events = get_site_journal_events(starting_point)
+        block.call(events)
+        starting_point = events.last.id
+        events_counter -= events.size
+      end
+    end
+
     private
 
     def get_items_by_id(item_type, items_ids)
@@ -72,10 +101,6 @@ module AllegroApi
         items += process_items_response(response[response_name][items_list_name])
       end
       items
-    end
-
-    def get_items_batch()
-
     end
 
     def get_items_in_pages(item_type)

@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Vary: Accept-Encoding
+Set-Cookie: ws2=beead3040dedf05be4abb2f16fa18f34; expires=Thu, 23-Apr-2015 14:17:03 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws3=N4bfd94ca3eaae1387eec11e6d33651c5; expires=Wed, 15-Nov-2113 13:47:03 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws4=x; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: TEST_QXLSESSID=12dce9382dc22b0759ce9c2541000c13481136d80bcc68me00; path=/; domain=.allegro.pl.webapisandbox.pl
+Cache-Control: private
+Pragma: no-cache
+Content-Type: text/xml; charset=utf-8
+X-Backend: allegro_qeppo
+Content-Length: 386
+Accept-Ranges: bytes
+Date: Thu, 23 Apr 2015 13:47:03 GMT
+Age: 0
+Connection: keep-alive
+X-Hit: HIT 0
+X-Origin: vte29-frontend-vte01
+X-Frame-Options: SAMEORIGIN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:SandboxWebApi"><SOAP-ENV:Body><ns1:doGetSiteJournalInfoResponse><ns1:siteJournalInfo><ns1:itemsNumber>5</ns1:itemsNumber><ns1:lastItemDate>0</ns1:lastItemDate></ns1:siteJournalInfo></ns1:doGetSiteJournalInfoResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
