@@ -17,5 +17,13 @@ module AllegroApi
       event.seller_id = data[:item_seller_id].to_i
       event
     end
+
+    def buy_now?
+      change_type == 'now'
+    end
+
+    def auction_ended?
+      change_type == 'end'
+    end
   end
 end

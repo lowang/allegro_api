@@ -58,7 +58,6 @@ module AllegroApi
       end
     end
 
-
     def get_site_journal_events(starting_point = nil)
       params = { session_handle: id }
       params[:starting_point] = starting_point if starting_point
@@ -77,11 +76,38 @@ module AllegroApi
       response[:items_number].to_i
     end
 
-
     def for_each_site_journal_events_page(starting_point = nil, &block)
       events_counter = count_site_journal_events(starting_point)
       while(events_counter > 0)
         events = get_site_journal_events(starting_point)
+        block.call(events)
+        starting_point = events.last.id
+        events_counter -= events.size
+      end
+    end
+
+    def get_deal_events(starting_point = nil)
+      params = { session_id: id }
+      params[:journal_start] = starting_point if starting_point
+      response = @client.call(:do_get_site_journal_deals, params)[:do_get_site_journal_deals_response][:site_journal_deals]
+      if response && response[:item]
+        response[:item].map {|api_data| DealEvent.from_api(api_data)}
+      else
+        []
+      end
+    end
+
+    def count_deal_events(starting_point = nil)
+      params = { session_id: id }
+      params[:journal_start] = starting_point if starting_point
+      response = @client.call(:do_get_site_journal_deals_info, params)[:do_get_site_journal_deals_info_response][:site_journal_deals_info]
+      response[:deal_events_count].to_i
+    end
+
+    def for_each_deal_events_page(starting_point = nil, &block)
+      events_counter = count_deal_events(starting_point)
+      while(events_counter > 0)
+        events = get_deal_events(starting_point)
         block.call(events)
         starting_point = events.last.id
         events_counter -= events.size

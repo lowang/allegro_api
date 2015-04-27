@@ -13,6 +13,7 @@ require "allegro_api/item"
 require "allegro_api/auction"
 require "allegro_api/image"
 require "allegro_api/journal_event"
+require "allegro_api/deal_event"
 
 module AllegroApi
 

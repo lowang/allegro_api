@@ -334,6 +334,88 @@ describe AllegroApi::Session do
       expect(in_block_code).to receive(:call).with(journal_events).twice
       session.for_each_site_journal_events_page {|page| in_block_code.call(page) }
     end
+  end
 
+  describe '#get_deal_events' do
+    context 'without specifying start point' do
+      it 'invokes doGetSiteJournalDeals SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal_deals, session_id: 1234).and_return(
+            {do_get_site_journal_deals_response: {site_journal_deals: {item: []}}})
+        session.get_deal_events
+      end
+    end
+
+    context 'with starting point' do
+      it 'invokes doGetSiteJournalDeals SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal_deals, session_id: 1234,
+          journal_start: 4321).and_return(
+          {do_get_site_journal_deals_response: {site_journal_deals: {item: []}}})
+        session.get_deal_events(4321)
+      end
+    end
+
+    context 'on success without events' do
+      let(:events) { session.get_deal_events }
+
+      before :each do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_get_site_journal_deals_no_events'
+      end
+
+      it 'returns an empty array' do
+        expect(events).to be_instance_of Array
+        expect(events.size).to eq 0
+      end
+    end
+  end
+
+  describe '#count_deal_events' do
+    context 'without specifying start point' do
+      it 'invokes doGetSiteJournalInfo SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal_deals_info, session_id: 1234).and_return(
+          {do_get_site_journal_deals_info_response: {site_journal_deals_info: {deal_events_count: 0, deal_last_event_time: 0}}})
+        session.count_deal_events
+      end
+    end
+
+    context 'with starting point' do
+      it 'invokes doGetSiteJournalInfo SOAP request' do
+        expect(client).to receive(:call).with(:do_get_site_journal_deals_info, session_id: 1234,
+          journal_start: 4321).and_return(
+            {do_get_site_journal_deals_info_response: {site_journal_deals_info: {deal_events_count: 0, deal_last_event_time: 0}}})
+        session.count_deal_events(4321)
+      end
+    end
+
+    context 'on success' do
+      let(:events_count) { session.count_deal_events }
+
+      before :each do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_get_site_journal_deals_info_success'
+      end
+
+      it 'returns the number of events' do
+        expect(events_count).to eq 5
+      end
+    end
+  end
+
+  describe '#for_each_deal_events_page' do
+    let(:deal_events) do
+      [ AllegroApi::DealEvent.new ] * 4
+    end
+
+    let(:in_block_code) { double }
+
+    before do
+      allow(session).to receive(:count_deal_events).and_return(8)
+      allow(session).to receive(:get_deal_events).and_return(deal_events)
+    end
+
+    it 'performs code of the block for each page of events' do
+      expect(in_block_code).to receive(:call).with(deal_events).twice
+      session.for_each_deal_events_page {|page| in_block_code.call(page) }
+    end
   end
 end

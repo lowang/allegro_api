@@ -37,4 +37,32 @@ describe AllegroApi::JournalEvent do
       expect(subject.seller_id).to eq 4109848
     end
   end
+
+  describe '#buy_now?' do
+    let(:event) { AllegroApi::JournalEvent.new }
+
+    it 'is true for "now" type events' do
+      event.change_type = 'now'
+      expect(event.buy_now?).to eq true
+    end
+
+    it 'is false for not "now" type events' do
+      event.change_type = 'end'
+      expect(event.buy_now?).to eq false
+    end
+  end
+
+  describe '#auction_ended?' do
+    let(:event) { AllegroApi::JournalEvent.new }
+
+    it 'is true for "end" type events' do
+      event.change_type = 'end'
+      expect(event.auction_ended?).to eq true
+    end
+
+    it 'is false for not "end" type events' do
+      event.change_type = 'now'
+      expect(event.auction_ended?).to eq false
+    end
+  end
 end
