@@ -359,10 +359,26 @@ describe AllegroApi::Session do
 
       before :each do
         stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_get_site_journal_deals_success'
+      end
+
+      it 'returns an array of deal events' do
+        expect(events).to be_instance_of Array
+        expect(events.size).to eq 1
+        expect(events).to all(be_instance_of AllegroApi::DealEvent)
+      end
+    end
+
+
+    context 'on success without events' do
+      let(:events) { session.get_deal_events }
+
+      before :each do
+        stub_wsdl_request_for wsdl_url
         stub_api_response_with 'do_get_site_journal_deals_no_events'
       end
 
-      it 'returns an empty array' do
+      it 'returns an array of journal events' do
         expect(events).to be_instance_of Array
         expect(events.size).to eq 0
       end
@@ -416,6 +432,29 @@ describe AllegroApi::Session do
     it 'performs code of the block for each page of events' do
       expect(in_block_code).to receive(:call).with(deal_events).twice
       session.for_each_deal_events_page {|page| in_block_code.call(page) }
+    end
+  end
+
+  describe '#get_tranactions' do
+    it 'invokes doGetPostBuyFormsDataForSellers SOAP request' do
+      expect(client).to receive(:call).with(:do_get_post_buy_forms_data_for_sellers, session_id: 1234,
+      transactions_ids_array: [1, 2, 3]).and_return({do_get_post_buy_forms_data_for_sellers_response: {post_buy_form_data: {}}})
+      session.get_transactions(1,2,3)
+    end
+
+    context 'on success' do
+      subject { session.get_transactions }
+
+      before :each do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_get_post_buy_forms_data_for_sellers_success'
+      end
+
+      it 'returns list of transactions' do
+        expect(subject).to be_instance_of Array
+        expect(subject.size).to eq 1
+        expect(subject).to all(be_instance_of AllegroApi::Transaction)
+      end
     end
   end
 end

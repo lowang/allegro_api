@@ -4,6 +4,8 @@ module AllegroApi
     attr_reader :user_id
     attr_reader :id
 
+    include ResponseHelpers
+
     # number of items per page in get_*_items requests
     GET_ITEMS_PAGE_SIZE = 100
 
@@ -62,11 +64,7 @@ module AllegroApi
       params = { session_handle: id }
       params[:starting_point] = starting_point if starting_point
       response = @client.call(:do_get_site_journal, params)[:do_get_site_journal_response][:site_journal_array]
-      if response && response[:item]
-        response[:item].map {|api_data| JournalEvent.from_api(api_data)}
-      else
-        []
-      end
+      process_items_response(response, JournalEvent)
     end
 
     def count_site_journal_events(starting_point = nil)
@@ -90,11 +88,7 @@ module AllegroApi
       params = { session_id: id }
       params[:journal_start] = starting_point if starting_point
       response = @client.call(:do_get_site_journal_deals, params)[:do_get_site_journal_deals_response][:site_journal_deals]
-      if response && response[:item]
-        response[:item].map {|api_data| DealEvent.from_api(api_data)}
-      else
-        []
-      end
+      process_items_response(response, DealEvent)
     end
 
     def count_deal_events(starting_point = nil)
@@ -114,6 +108,13 @@ module AllegroApi
       end
     end
 
+    def get_transactions(*transaction_ids)
+      params = { session_id: id }
+      params[:transactions_ids_array] = transaction_ids
+      response = @client.call(:do_get_post_buy_forms_data_for_sellers, params)[:do_get_post_buy_forms_data_for_sellers_response][:post_buy_form_data]
+      process_items_response(response, Transaction)
+    end
+
     private
 
     def get_items_by_id(item_type, items_ids)
@@ -124,7 +125,7 @@ module AllegroApi
       items_ids.each_slice(GET_ITEMS_PAGE_SIZE) do |batch_ids|
         response = @client.call(request_name, session_id: id,
           item_ids: {item: batch_ids})
-        items += process_items_response(response[response_name][items_list_name])
+        items += process_items_response(response[response_name][items_list_name], Item)
       end
       items
     end
@@ -145,7 +146,7 @@ module AllegroApi
         page_size: GET_ITEMS_PAGE_SIZE, page_number: page)
       response_name = "do_get_my_#{item_type}_response".to_sym
       all_items_count = response[response_name]["#{item_type}_counter".to_sym].to_i
-      items = process_items_response(response[response_name]["#{item_type}_list".to_sym])
+      items = process_items_response(response[response_name]["#{item_type}_list".to_sym], Item)
       return [all_items_count, items]
     end
 
@@ -155,17 +156,6 @@ module AllegroApi
       params[:page_number] = page
       params[:item_ids] = {item: items_ids} unless items_ids.empty?
       params
-    end
-
-    def process_items_response(response)
-      return [] unless response && response[:item]
-      if response[:item].is_a? Array
-        response[:item].map do |data|
-          Item.from_api(data)
-        end
-      else
-        [Item.from_api(response[:item])]
-      end
     end
   end
 end
