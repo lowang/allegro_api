@@ -22,5 +22,21 @@ module AllegroApi
       event.quantity = data[:deal_quantity].to_i
       event
     end
+
+    def deal_created?
+      event_type == 1
+    end
+
+    def transaction_created?
+      event_type == 2
+    end
+
+    def transaction_canceled?
+      event_type == 3
+    end
+
+    def transaction_paid?
+      event_type == 4
+    end
   end
 end

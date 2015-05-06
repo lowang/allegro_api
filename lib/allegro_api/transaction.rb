@@ -7,7 +7,6 @@ module AllegroApi
     attr_accessor :shipment_amount
     attr_accessor :invoice_required
     attr_accessor :message
-    attr_accessor :invoice_data
     attr_accessor :shipment_address
     attr_accessor :payment_type
     attr_accessor :payment_id

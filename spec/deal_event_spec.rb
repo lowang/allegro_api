@@ -48,4 +48,49 @@ describe AllegroApi::DealEvent do
       expect(subject.quantity).to eq 2
     end
   end
+
+  describe '#deal_created?' do
+    it 'is true for deal event of type 1' do
+      subject.event_type = 1
+      expect(subject.deal_created?).to be_truthy
+    end
+
+    it 'is false for events with types other than 1' do
+      expect(subject.deal_created?).to be_falsy
+    end
+  end
+
+  describe '#transaction_created?' do
+    it 'is true for deal event of type 2' do
+      subject.event_type = 2
+      expect(subject.transaction_created?).to be_truthy
+    end
+
+    it 'is false for events with types other than 2' do
+      subject.event_type = 3
+      expect(subject.transaction_created?).to be_falsy
+    end
+  end
+
+  describe '#transaction_canceled?' do
+    it 'is true for deal event of type 3' do
+      subject.event_type = 3
+      expect(subject.transaction_canceled?).to be_truthy
+    end
+
+    it 'is false for events with types other than 2' do
+      expect(subject.transaction_canceled?).to be_falsy
+    end
+  end
+
+  describe '#transaction_paid?' do
+    it 'is true for deal event of type 4' do
+      subject.event_type = 4
+      expect(subject.transaction_paid?).to be_truthy
+    end
+
+    it 'is false for events with types other than 4' do
+      expect(subject.transaction_paid?).to be_falsy
+    end
+  end
 end
