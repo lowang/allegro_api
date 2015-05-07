@@ -443,7 +443,7 @@ describe AllegroApi::Session do
     end
 
     context 'on success' do
-      subject { session.get_transactions }
+      subject { session.get_transactions(1,2,3) }
 
       before :each do
         stub_wsdl_request_for wsdl_url

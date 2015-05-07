@@ -109,10 +109,15 @@ module AllegroApi
     end
 
     def get_transactions(*transaction_ids)
-      params = { session_id: id }
-      params[:transactions_ids_array] = transaction_ids
-      response = @client.call(:do_get_post_buy_forms_data_for_sellers, params)[:do_get_post_buy_forms_data_for_sellers_response][:post_buy_form_data]
-      process_items_response(response, Transaction)
+      transactions = []
+      # 25 is max number of transaction ids that can be passed to do_get_post_buy_forms_data_for_sellers
+      transaction_ids.each_slice(25) do |slice_ids|
+        params = { session_id: id }
+        params[:transactions_ids_array] = slice_ids
+        response = @client.call(:do_get_post_buy_forms_data_for_sellers, params)[:do_get_post_buy_forms_data_for_sellers_response][:post_buy_form_data]
+        transactions += process_items_response(response, Transaction)
+      end
+      transactions
     end
 
     private
