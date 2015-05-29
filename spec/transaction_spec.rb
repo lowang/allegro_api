@@ -148,5 +148,17 @@ describe AllegroApi::Transaction do
      it 'sets delivery point address' do
        expect(subject.delivery_point_address).to be_instance_of(AllegroApi::TransactionAddress)
      end
+
+     it 'sets buyer id' do
+       expect(subject.buyer_id).to eq 2580451
+     end
+
+     it 'sets buyer login' do
+       expect(subject.buyer_login).to eq 'logintestowy'
+     end
+
+     it 'sets buyer email' do
+       expect(subject.buyer_email).to eq 'test@domena.pl'
+     end
    end
  end

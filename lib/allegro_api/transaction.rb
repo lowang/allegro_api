@@ -3,6 +3,8 @@ module AllegroApi
     attr_accessor :id
     attr_accessor :items
     attr_accessor :buyer_id
+    attr_accessor :buyer_login
+    attr_accessor :buyer_email
     attr_accessor :total_amount
     attr_accessor :shipment_amount
     attr_accessor :invoice_required
@@ -43,6 +45,10 @@ module AllegroApi
       transaction.invoice_address = TransactionAddress.from_api(api_data[:post_buy_form_invoice_data])
       transaction.shipment_address = TransactionAddress.from_api(api_data[:post_buy_form_shipment_address])
       transaction.delivery_point_address = TransactionAddress.from_api(api_data[:post_buy_form_gd_address])
+      transaction.buyer_id = api_data[:post_buy_form_buyer_id].to_i
+      transaction.buyer_login = api_data[:post_buy_form_buyer_login]
+      transaction.buyer_email = api_data[:post_buy_form_buyer_email]
+
       transaction
     end
   end
