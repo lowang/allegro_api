@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:SandboxWebApi">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DoGetSiteJournalRequest>
+         <urn:sessionHandle>06a2421e2f97be77fe7d0b212278565ce6efbca00bcc68me00_1</urn:sessionHandle>
+
+      </urn:DoGetSiteJournalRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

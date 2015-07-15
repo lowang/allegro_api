@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Vary: Accept-Encoding
+Set-Cookie: ws2=c94fad1bed0ccddcb90c22ebeccbcb75; expires=Tue, 28-Apr-2015 11:59:02 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws3=N3291dee24e0f2080eb5baab9e8da606c; expires=Mon, 20-Nov-2113 11:29:02 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws4=x; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: TEST_QXLSESSID=b6b971b0d0927b59877ed4d652ed03dc4e8ffc010bcc68me00; path=/; domain=.allegro.pl.webapisandbox.pl
+Cache-Control: private
+Pragma: no-cache
+Content-Type: text/xml; charset=utf-8
+X-Backend: allegro_qeppo
+Content-Length: 718
+Accept-Ranges: bytes
+Date: Tue, 28 Apr 2015 11:29:02 GMT
+Age: 0
+Connection: keep-alive
+X-Hit: HIT 0
+X-Origin: vte29-frontend-vte01
+X-Frame-Options: SAMEORIGIN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:SandboxWebApi"><SOAP-ENV:Body><ns1:doGetSiteJournalDealsResponse><ns1:siteJournalDeals><ns1:item><ns1:dealEventId>3465</ns1:dealEventId><ns1:dealEventType>1</ns1:dealEventType><ns1:dealEventTime>1430220367</ns1:dealEventTime><ns1:dealId>1185363934</ns1:dealId><ns1:dealTransactionId>0</ns1:dealTransactionId><ns1:dealSellerId>42011575</ns1:dealSellerId><ns1:dealItemId>5149169981</ns1:dealItemId><ns1:dealBuyerId>42011575</ns1:dealBuyerId><ns1:dealQuantity>1</ns1:dealQuantity></ns1:item></ns1:siteJournalDeals></ns1:doGetSiteJournalDealsResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>

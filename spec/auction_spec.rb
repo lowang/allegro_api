@@ -84,6 +84,34 @@ describe AllegroApi::Auction do
     end
   end
 
+  describe '#quantity_type' do
+    it 'returns value of the QUANTITY_TYPE field' do
+      auction.fields[AllegroApi::Fid::QUANTITY_TYPE] = 1
+      expect(auction.quantity_type).to eq 1
+    end
+  end
+
+  describe '#quantity_type=' do
+    it 'sets value of the QUANTITY_TYPE field' do
+      auction.quantity_type = 2
+      expect(auction.fields[AllegroApi::Fid::QUANTITY_TYPE]).to eq 2
+    end
+  end
+
+  describe '#promo_options' do
+    it 'returns value of the PROMO_OPTIONS field' do
+      auction.fields[AllegroApi::Fid::PROMO_OPTIONS] = 1
+      expect(auction.promo_options).to eq 1
+    end
+  end
+
+  describe '#promo_options=' do
+    it 'sets value of the PROMO_OPTIONS field' do
+      auction.promo_options = 2
+      expect(auction.fields[AllegroApi::Fid::PROMO_OPTIONS]).to eq 2
+    end
+  end
+
   describe '#price' do
     it 'returns value of the BUY_NOW_PRICE field' do
       auction.fields[AllegroApi::Fid::BUY_NOW_PRICE] = 6.69
@@ -165,6 +193,20 @@ describe AllegroApi::Auction do
     it 'sets value of the PROVINCE field' do
       auction.province = 2
       expect(auction.fields[AllegroApi::Fid::PROVINCE]).to eq 2
+    end
+  end
+
+  describe '#bank_account' do
+    it 'returns value of the BANK_ACCOUNT_1 field' do
+      auction.fields[AllegroApi::Fid::BANK_ACCOUNT_1] = '123455'
+      expect(auction.bank_account).to eq '123455'
+    end
+  end
+
+  describe '#bank_account=' do
+    it 'sets value of the BANK_ACCOUNT_1 field' do
+      auction.bank_account = '543211'
+      expect(auction.fields[AllegroApi::Fid::BANK_ACCOUNT_1]).to eq '543211'
     end
   end
 
