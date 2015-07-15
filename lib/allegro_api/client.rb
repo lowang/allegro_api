@@ -13,13 +13,14 @@ module AllegroApi
       @api_version = params[:api_version]
       @logger = params[:logger]
       @log_level = params[:log_level] || :info
+      @savon_adapter = params[:savon_adapter] || :net_http
     end
 
 
     def soap_client
       @soap_client ||= Savon.client(wsdl: wsdl, log_level: log_level, log: logger,
         env_namespace: :soapenv, namespace_identifier: :urn, pretty_print_xml: true,
-        ssl_verify_mode: :none)
+        ssl_verify_mode: :none, adapter: @savon_adapter)
     end
 
 
