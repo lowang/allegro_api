@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative './test_cache'
 
 describe AllegroApi::Auction do

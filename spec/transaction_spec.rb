@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 describe AllegroApi::Transaction do
   describe 'from_api1' do
     let(:parsed_api_response) { Psych.load_file(File.join(AllegroApi.root, 'spec/fixtures/do_get_post_buy_forms_data_for_sellers.yml')) }
@@ -9,7 +10,7 @@ describe AllegroApi::Transaction do
       expect(transaction.items.first.id).to eq(5119194000)
       expect(transaction.items.first.title).to eq("iphone 5s")
       expect(transaction.items.first.amount).to eq(BigDecimal.new("1899"))
-      expect(transaction.items.first.deals.first.datetime).to eq(Time.at(1425646461).to_datetime)
+      expect(transaction.items.first.deals.first.created_at).to eq(Time.at(1425646461).to_datetime)
       expect(transaction.items.first.deals.first.quantity).to eq(1)
 
       expect(transaction.buyer.id).to eq(413691)
@@ -17,14 +18,14 @@ describe AllegroApi::Transaction do
       expect(transaction.buyer.email).to eq("janusz@buziaczek.pl")
       expect(transaction.shipment_address.full_name).to eq("Jan Kwiatkoski")
       expect(transaction.shipment_address.company).to eq("u Janusza")
-      expect(transaction.shipment_address.country_id).to eq(1)
-      expect(transaction.shipment_address.post_code).to eq("11-111")
+      expect(transaction.shipment_address.country).to eq(1)
+      expect(transaction.shipment_address.zipcode).to eq("11-111")
       expect(transaction.shipment_address.city).to eq("Warszawa")
-      expect(transaction.shipment_address.address).to eq("Marcelinskaya 90")
+      expect(transaction.shipment_address.street).to eq("Marcelinskaya 90")
       expect(transaction.shipment_address.phone).to eq("+381111111111")
     end
   end
-  
+
   describe 'from_api2' do
     let(:api_data) do
       { post_buy_form_id: "3381748",
@@ -44,7 +45,7 @@ describe AllegroApi::Transaction do
                 deal_date: DateTime.new(2015,2,3,4,5,6),
                 deal_was_discounted: true
               }}
-        }},
+          }},
         post_buy_form_buyer_id: "2580451",
         post_buy_form_amount: "36.00",
         post_buy_form_postage_amount: "16.00",
@@ -103,88 +104,88 @@ describe AllegroApi::Transaction do
             post_buy_form_operator_id: "1",
             post_buy_form_package_id: '1Z7E09X67746525354',
             post_buy_form_package_status: 'Wysłane z ładunkiem'
-        }],
+          }],
         post_buy_form_surcharges_list: ["4381748"],
         post_buy_form_gd_additional_info: 'W soboty punkt czynny do godziny 14.',
         post_buy_form_payment_amount: "40.00",
         post_buy_form_sent_by_seller: "0",
         post_buy_form_buyer_login: 'logintestowy',
         post_buy_form_buyer_email: 'test@domena.pl' }
-     end
+    end
 
-     subject { AllegroApi::Transaction.from_api(api_data) }
+    subject { AllegroApi::Transaction.from_api(api_data) }
 
-     it 'sets id' do
-       expect(subject.id).to eq 3381748
-     end
+    it 'sets id' do
+      expect(subject.id).to eq 3381748
+    end
 
-     it 'populates items' do
-       expect(subject.items.size).to eq 1
-       expect(subject.items).to all(be_instance_of AllegroApi::TransactionItem)
-     end
+    it 'populates items' do
+      expect(subject.items.size).to eq 1
+      expect(subject.items).to all(be_instance_of AllegroApi::TransactionItem)
+    end
 
-     it 'sets message' do
-       expect(subject.message).to eq 'Proszę o szybką wysyłkę'
-     end
+    it 'sets message' do
+      expect(subject.message).to eq 'Proszę o szybką wysyłkę'
+    end
 
-     it 'sets total amount' do
-       expect(subject.total_amount).to eq 36.00
-     end
+    it 'sets total amount' do
+      expect(subject.total_amount).to eq 36.00
+    end
 
-     it 'sets shipment amount' do
-       expect(subject.shipment_amount).to eq 16.00
-     end
+    it 'sets shipment amount' do
+      expect(subject.shipment_amount).to eq 16.00
+    end
 
-     it 'sets invoice required' do
-       expect(subject.invoice_required).to eq true
-     end
+    it 'sets invoice required' do
+      expect(subject.invoice_required).to eq true
+    end
 
-     it 'sets payment type' do
-       expect(subject.payment_type).to eq 'ab'
-     end
+    it 'sets payment type' do
+      expect(subject.payment.type).to eq 'ab'
+    end
 
-     it 'sets payment id' do
-       expect(subject.payment_id).to eq 67364906
-     end
+    it 'sets payment id' do
+      expect(subject.payment.id).to eq 67364906
+    end
 
-     it 'sets payment status' do
-       expect(subject.payment_status).to eq 'Zakończona'
-     end
+    it 'sets payment status' do
+      expect(subject.payment.status).to eq 'Zakończona'
+    end
 
-     it 'sets payment inititated at time' do
-       expect(subject.payment_initiated_at).to eq DateTime.new(2015,2,3,4,5,6)
-     end
+    it 'sets payment inititated at time' do
+      expect(subject.payment.initiated_at).to eq DateTime.new(2015,2,3,4,5,6)
+    end
 
-     it 'sets payment received at time' do
-       expect(subject.payment_received_at).to eq DateTime.new(2015,2,3,4,5,6)
-     end
+    it 'sets payment received at time' do
+      expect(subject.payment.received_at).to eq DateTime.new(2015,2,3,4,5,6)
+    end
 
-     it 'sets shipment method id' do
-       expect(subject.shipment_method_id).to eq 10005
-     end
+    it 'sets shipment method id' do
+      expect(subject.shipment_method_id).to eq 10005
+    end
 
-     it 'sets invoice address' do
-       expect(subject.invoice_address).to be_instance_of(AllegroApi::TransactionAddress)
-     end
+    it 'sets invoice address' do
+      expect(subject.invoice_address).to be_instance_of(AllegroApi::TransactionAddress)
+    end
 
-     it 'sets shipment address' do
-       expect(subject.shipment_address).to be_instance_of(AllegroApi::TransactionAddress)
-     end
+    it 'sets shipment address' do
+      expect(subject.shipment_address).to be_instance_of(AllegroApi::TransactionAddress)
+    end
 
-     it 'sets delivery point address' do
-       expect(subject.delivery_point_address).to be_instance_of(AllegroApi::TransactionAddress)
-     end
+    it 'sets delivery point address' do
+      expect(subject.delivery_point_address).to be_instance_of(AllegroApi::TransactionAddress)
+    end
 
-     it 'sets buyer id' do
-       expect(subject.buyer_id).to eq 2580451
-     end
+    it 'sets buyer id' do
+      expect(subject.buyer.id).to eq 2580451
+    end
 
-     it 'sets buyer login' do
-       expect(subject.buyer_login).to eq 'logintestowy'
-     end
+    it 'sets buyer login' do
+      expect(subject.buyer.login).to eq 'logintestowy'
+    end
 
-     it 'sets buyer email' do
-       expect(subject.buyer_email).to eq 'test@domena.pl'
-     end
-   end
+    it 'sets buyer email' do
+      expect(subject.buyer.email).to eq 'test@domena.pl'
+    end
+  end
 end

@@ -2,7 +2,7 @@ require 'ostruct'
 
 module AllegroApi
   class Transaction
-    attr_accessor :id, 
+    attr_accessor :id
     attr_accessor :message
     attr_accessor :total_amount
     attr_accessor :shipment_amount
@@ -15,27 +15,13 @@ module AllegroApi
     def self.from_api(data)
       transaction = Transaction.new
       transaction.id = data[:post_buy_form_id].to_i
-      transaction.message = api_data[:post_buy_form_msg_to_seller]
-      transaction.total_amount = api_data[:post_buy_form_amount].to_f
-      transaction.shipment_amount = api_data[:post_buy_form_postage_amount].to_f
+      transaction.message = data[:post_buy_form_msg_to_seller]
+      transaction.total_amount = data[:post_buy_form_amount].to_f
+      transaction.shipment_amount = data[:post_buy_form_postage_amount].to_f
       transaction.shipment_method_id = data[:post_buy_form_shipment_id].to_i
-      transaction.invoice_required = (api_data[:post_buy_form_invoice_option] == '1')
+      transaction.invoice_required = (data[:post_buy_form_invoice_option] == '1')
 
-      transaction.items = []
-      data[:post_buy_form_items].each do |key,dataitem|
-        item = AllegroApi::Item.new
-        item.id = dataitem[:post_buy_form_it_id].to_i
-        item.title = dataitem[:post_buy_form_it_title]
-        item.amount = BigDecimal.new dataitem[:post_buy_form_it_amount]
-        item.deals = []
-        dataitem[:post_buy_form_it_deals].each do |key, dealitem|
-          deal = OpenStruct.new
-          deal.quantity = dealitem[:deal_quantity].to_i
-          deal.datetime = dealitem[:deal_date]
-          item.deals << deal
-        end
-        transaction.items << item
-      end
+      transaction.items = process_items_response(data[:post_buy_form_items], TransactionItem)
 
       transaction.buyer = OpenStruct.new
       transaction.buyer.id = data[:post_buy_form_buyer_id].to_i

@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe AllegroApi::DealEvent do
   describe 'from_api' do
     let(:api_data) do
