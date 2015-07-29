@@ -59,21 +59,6 @@ module AllegroApi
         [item[:item_id], item[:users_post_buy_data][:item]]
       end.flatten]
     end
-    
-    # type: seller|buyer
-    def get_transaction_details(transactions_ids, type='seller')
-      transactions_ids = Array.wrap(transactions_ids)
-      response = @client.call(:"do_get_post_buy_forms_data_for_#{type}s", session_id: id, transactionsIdsArray: {item: transactions_ids})
-      data = response[:"do_get_post_buy_forms_data_for_#{type}s_response"][:"post_buy_form_data"][:item]
-      AllegroApi::Transaction.from_api(data)
-    end
-    
-    # type: seller|buyer
-    def get_transactions(items_ids, type='seller')
-      items_ids = Array.wrap(items_ids)
-      response = @client.call(:do_get_transactions_i_ds, session_handle: id, items_id_array: {item: items_ids}, user_role: type)
-      Array.wrap(response[:do_get_transactions_i_ds_response][:transactions_ids_array].try(:[],:item))
-    end
 
     def auctions
       Enumerator.new do |collection|
@@ -131,13 +116,13 @@ module AllegroApi
       end
     end
 
-    def get_transactions(*transaction_ids)
+    def get_transactions(transaction_ids, type='seller')
       transactions = []
       # 25 is max number of transaction ids that can be passed to do_get_post_buy_forms_data_for_sellers
       transaction_ids.each_slice(25) do |slice_ids|
-        params = { session_id: id }
-        params[:transactions_ids_array] = slice_ids
-        response = @client.call(:do_get_post_buy_forms_data_for_sellers, params)[:do_get_post_buy_forms_data_for_sellers_response][:post_buy_form_data]
+        params = { session_id: id, transactions_ids_array: slice_ids.map { |transaction_id| {item: transaction_id} }}
+        response = @client.call(:"do_get_post_buy_forms_data_for_#{type}s", params)
+        response = response[:"do_get_post_buy_forms_data_for_#{type}s_response"][:"post_buy_form_data"]
         transactions += process_items_response(response, Transaction)
       end
       transactions

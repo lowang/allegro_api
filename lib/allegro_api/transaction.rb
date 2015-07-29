@@ -33,6 +33,7 @@ module AllegroApi
       transaction.delivery_point_address = TransactionAddress.from_api(data[:post_buy_form_gd_address])
       
       transaction.payment = OpenStruct.new
+      transaction.payment.amount = data[:post_buy_form_payment_amount]
       transaction.payment.type = data[:post_buy_form_pay_type]
       transaction.payment.id = data[:post_buy_form_pay_id].to_i
       transaction.payment.status = data[:post_buy_form_pay_status]
