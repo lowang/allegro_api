@@ -2,6 +2,10 @@ require 'base64'
 require 'time'
 require 'digest'
 require 'savon'
+require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/array/wrap'
+require 'active_support/ordered_hash'
+require 'enumerator/memoizing'
 
 require "allegro_api/version"
 require "allegro_api/response_helpers"
@@ -16,10 +20,20 @@ require "allegro_api/auction"
 require "allegro_api/image"
 require "allegro_api/journal_event"
 require "allegro_api/deal_event"
+require "allegro_api/purchase_detail"
 require "allegro_api/transaction_address"
 require "allegro_api/transaction_item_deal"
 require "allegro_api/transaction_item"
 require "allegro_api/transaction"
+
+require "allegro_api/repository/base"
+require "allegro_api/repository/auction"
+require "allegro_api/repository/category"
+require "allegro_api/repository/deal_event"
+require "allegro_api/repository/item"
+require "allegro_api/repository/journal_event"
+require "allegro_api/repository/purchase_detail"
+require "allegro_api/repository/transaction"
 
 module AllegroApi
 

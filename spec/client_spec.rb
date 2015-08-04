@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe AllegroApi::Client do
   let(:webapi_key) { '12345' }
   let(:country_code) { 99 }
@@ -39,8 +41,7 @@ describe AllegroApi::Client do
     expect(client.soap_client).to be_instance_of Savon::Client
   end
 
-
-  describe "#call" do
+  describe '#call' do
     let(:response) { double(body: {})}
     before :each do
       stub_wsdl_request_for wsdl_url
@@ -58,7 +59,6 @@ describe AllegroApi::Client do
       expect(client.call(:api_method, api_method_params)).to eq response.body
     end
   end
-
 
   describe '#api_version' do
     let(:client) { AllegroApi::Client.new webapi_key: webapi_key, wsdl: wsdl_url, country_code: country_code }
@@ -96,7 +96,7 @@ describe AllegroApi::Client do
     end
   end
 
-  describe "#sign_in" do
+  describe '#sign_in' do
     let(:login) { 'user_login' }
     let(:encrypted_password) { 'encrypted_password' }
 
@@ -132,52 +132,4 @@ describe AllegroApi::Client do
     end
   end
 
-
-  describe '#get_fields' do
-    it 'invokes SOAP request' do
-      expect(client).to receive(:call).with(:do_get_sell_form_fields_ext,
-        country_code: country_code, local_version: 0, webapi_key: webapi_key).
-        and_return({do_get_sell_form_fields_ext_response: {sell_form_fields: {item: []}}})
-        client.get_fields
-    end
-
-    describe 'on success' do
-      let(:fields) { client.get_fields }
-
-      before :each do
-        stub_wsdl_request_for wsdl_url
-        stub_api_response_with 'do_get_sell_form_fields_ext_success'
-      end
-
-      it 'returns an array of fields' do
-        expect(fields).to be_instance_of Array
-        expect(fields.size).to eq 5182
-        expect(fields).to all(be_instance_of AllegroApi::Field)
-      end
-    end
-  end
-
-  describe '#get_categories' do
-    it 'invokes SOAP request' do
-      expect(client).to receive(:call).with(:do_get_cats_data,
-        country_id: country_code, local_version: 0, webapi_key: webapi_key).
-        and_return({do_get_cats_data_response: {cats_list: {item: []}}})
-        client.get_categories
-    end
-
-    describe 'on success' do
-      let(:categories) { client.get_categories }
-
-      before :each do
-        stub_wsdl_request_for wsdl_url
-        stub_api_response_with 'do_get_cats_data_success'
-      end
-
-      it 'returns an array of fields' do
-        expect(categories).to be_instance_of Array
-        expect(categories.size).to eq 23817
-        expect(categories).to all(be_instance_of AllegroApi::Category)
-      end
-    end
-  end
 end
