@@ -10,20 +10,6 @@ module AllegroApi
         end
       end
 
-      # metoda pobiera wszystkie pola formularza do wystawiania aukcji
-      # @return [Array]
-      def fields
-        response = @session.client.call(:do_get_sell_form_fields_ext,
-          country_code: @session.client.country_code,
-          local_version: 0,
-          webapi_key: @session.client.webapi_key)[:do_get_sell_form_fields_ext_response][:sell_form_fields][:item]
-        if response.is_a? Array
-          response.map {|data| AllegroApi::Field.from_api(data) }
-        else
-          AllegroApi::Field.from_api(response)
-        end
-      end
-
       def find(auction_id)
         response = @session.client.call(:do_get_item_fields, session_id: @session.id, item_id: auction_id)[:do_get_item_fields_response][:item_fields][:item]
         auction = AllegroApi::Auction.from_api(response)

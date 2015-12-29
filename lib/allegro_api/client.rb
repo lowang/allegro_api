@@ -59,5 +59,9 @@ module AllegroApi
       AllegroApi::Repository::Category.new(self)
     end
 
+    def fields
+      AllegroApi::Repository::Field.new(self)
+    end
+
   end
 end
