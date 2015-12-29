@@ -36,10 +36,12 @@ describe AllegroApi::Repository::Field do
       stub_wsdl_request_for wsdl_url
       stub_api_response_with 'do_get_sell_form_fields_ext_success'
     end
-    subject { fields_repository.first }
     it 'only process single element' do
       expect(AllegroApi::Field).to receive(:from_api).once.and_call_original
-      expect(subject).to be_instance_of AllegroApi::Field
+      expect(fields_repository.first).to be_instance_of AllegroApi::Field
+    end
+    it 'has 5k+ elements but using enumerator it only calls AllegroApi::Field.from_api once in above example' do
+      expect(fields_repository.to_a.count).to eq(5182)
     end
   end
 end
