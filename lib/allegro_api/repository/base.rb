@@ -3,8 +3,13 @@ module AllegroApi
     class Base
       include ResponseHelpers
 
-      def initialize(session)
-        @session = session
+      def initialize(handle)
+        @session = handle if handle.is_a? AllegroApi::Session
+        @client = handle if handle.is_a? AllegroApi::Client
+      end
+
+      def client
+        @session && @session.client || @client
       end
     end
 

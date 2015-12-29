@@ -7,10 +7,10 @@ module AllegroApi
 
       # metoda pobiera listę kategorii z allegro
       def get_categories
-        response = @session.client.call(:do_get_cats_data,
-          country_id: @session.client.country_code,
+        response = client.call(:do_get_cats_data,
+          country_id: client.country_code,
           local_version: 0,
-          webapi_key: @session.client.webapi_key)[:do_get_cats_data_response][:cats_list][:item]
+          webapi_key: client.webapi_key)[:do_get_cats_data_response][:cats_list][:item]
         if response.is_a? Array
           response.map {|data| AllegroApi::Category.from_api(data) }
         else
