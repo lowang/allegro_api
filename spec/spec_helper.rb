@@ -22,14 +22,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.before(:all) do
-    WebMock.disable_net_connect!
-  end
-
-  config.after(:all) do
-    WebMock.allow_net_connect!
-  end
-
   config.include Helpers
 
 # The settings below are suggested to provide a good initial experience

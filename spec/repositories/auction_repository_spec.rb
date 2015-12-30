@@ -112,28 +112,4 @@ describe AllegroApi::Repository::Item do
     end
   end
 
-  describe '#fields' do
-    subject { auctions_repository.fields }
-
-    it 'invokes SOAP request' do
-      expect(client).to receive(:call).with(:do_get_sell_form_fields_ext,
-          country_code: 1, local_version: 0, webapi_key: webapi_key).
-          and_return({ do_get_sell_form_fields_ext_response: { sell_form_fields: { item: [] } } })
-      subject
-    end
-
-    describe 'on success' do
-      before :each do
-        stub_wsdl_request_for wsdl_url
-        stub_api_response_with 'do_get_sell_form_fields_ext_success'
-      end
-
-      it 'returns an array of fields' do
-        expect(subject).to be_instance_of Array
-        expect(subject.size).to eq 5182
-        expect(subject).to all(be_instance_of AllegroApi::Field)
-      end
-    end
-  end
-
 end
