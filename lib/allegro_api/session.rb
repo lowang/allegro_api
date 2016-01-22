@@ -11,6 +11,10 @@ module AllegroApi
       @user_id = user_id
     end
 
+    def accounts
+      AllegroApi::Repository::Account.new(self)
+    end
+
     def auctions
       AllegroApi::Repository::Auction.new(self)
     end

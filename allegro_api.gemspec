@@ -6,8 +6,8 @@ require 'allegro_api/version'
 Gem::Specification.new do |spec|
   spec.name          = "allegro_api"
   spec.version       = AllegroApi::VERSION
-  spec.authors       = ["Zbigniew Probulski"]
-  spec.email         = ["zbigniew.probulski@nokaut.pl"]
+  spec.authors       = ["Przemyslaw Wroblewski","Zbigniew Probulski"]
+  spec.email         = ["przemyslaw.wroblewski@gmail.com", "zbigniew.probulski@nokaut.pl"]
   spec.summary       = %q{The gem for Allegro API interaction}
   spec.description   = %q{The gem for Allegro API interaction}
   spec.homepage      = ""
@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "enumerator-memoizing"
 
   spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "activemodel"
   spec.add_development_dependency "activesupport"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "webmock"

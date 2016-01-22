@@ -1,0 +1,136 @@
+---
+:user_data:
+  :user_id: !ruby/string:Nori::StringWithAttributes
+    str: '6879039'
+    attributes: {}
+  :user_login: !ruby/string:Nori::StringWithAttributes
+    str: ELECTROpl
+    attributes: {}
+  :user_rating: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :user_first_name: !ruby/string:Nori::StringWithAttributes
+    str: Zenon
+    attributes: {}
+  :user_last_name: !ruby/string:Nori::StringWithAttributes
+    str: Nowak
+    attributes: {}
+  :user_maiden_name: !ruby/string:Nori::StringWithAttributes
+    str: XXXNONAMEXXX
+    attributes: {}
+  :user_company: !ruby/string:Nori::StringWithAttributes
+    str: TERG S.A.
+    attributes: {}
+  :user_country_id: !ruby/string:Nori::StringWithAttributes
+    str: '1'
+    attributes: {}
+  :user_state_id: !ruby/string:Nori::StringWithAttributes
+    str: '11'
+    attributes: {}
+  :user_postcode: !ruby/string:Nori::StringWithAttributes
+    str: 77-400
+    attributes: {}
+  :user_city: !ruby/string:Nori::StringWithAttributes
+    str: Złotów
+    attributes: {}
+  :user_address: !ruby/string:Nori::StringWithAttributes
+    str: Za Dworcem 1 d
+    attributes: {}
+  :user_email: !ruby/string:Nori::StringWithAttributes
+    str: zenon.nowak@electro.pl
+    attributes: {}
+  :user_phone: !ruby/string:Nori::StringWithAttributes
+    str: '22 122 32 00'
+    attributes: {}
+  :user_phone2: 
+  :user_ss_status: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :site_country_id: !ruby/string:Nori::StringWithAttributes
+    str: '1'
+    attributes: {}
+  :user_junior_status: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :user_birth_date: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :user_has_shop: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :user_company_icon: !ruby/string:Nori::StringWithAttributes
+    str: '1'
+    attributes: {}
+  :user_is_allegro_standard: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+:invoice_data:
+  :company_name: !ruby/string:Nori::StringWithAttributes
+    str: TERG S.A.
+    attributes: {}
+  :company_nip: !ruby/string:Nori::StringWithAttributes
+    str: '7671004218'
+    attributes: {}
+:company_extra_data:
+  :company_type: !ruby/string:Nori::StringWithAttributes
+    str: spółka akcyjna
+    attributes: {}
+  :company_nip: !ruby/string:Nori::StringWithAttributes
+    str: '7671004218'
+    attributes: {}
+  :company_regon: !ruby/string:Nori::StringWithAttributes
+    str: '570217011'
+    attributes: {}
+  :company_krs: !ruby/string:Nori::StringWithAttributes
+    str: '427063'
+    attributes: {}
+  :company_activity_sort: 
+:company_second_address:
+  :company_worker_first_name: 
+  :company_worker_last_name: 
+  :company_address: 
+  :company_postcode: 
+  :company_city: 
+  :company_country_id: !ruby/string:Nori::StringWithAttributes
+    str: '1'
+    attributes: {}
+  :company_state_id: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+:pharmacy_data:
+  :pharmacy_opening_date: 
+  :pharmacy_expiration_date: 
+  :pharmacy_name: 
+  :pharmacy_pharmacist_full_name: 
+  :pharmacy_address: 
+  :pharmacy_postcode: 
+  :pharmacy_city: 
+  :pharmacy_commune: 
+  :pharmacy_country_id: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :pharmacy_state_id: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :pharmacy_permit_number: 
+  :pharmacy_permit_info: 
+:alcohol_data:
+  :alcohol_opening_date: 
+  :alcohol_expiration_date: 
+  :alcohol_shop_name: 
+  :alcohol_shop_address: 
+  :alcohol_shop_postcode: 
+  :alcohol_shop_city: 
+  :alcohol_shop_commune: 
+  :alcohol_shop_country_id: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :alcohol_shop_state_id: !ruby/string:Nori::StringWithAttributes
+    str: '0'
+    attributes: {}
+  :alcohol_permit_number: 
+  :alcohol_permit_authority: 
+  :alcohol_permit_info: 
+:related_persons:
+  :spouse_first_name: 
+  :spouse_last_name: 
