@@ -23,5 +23,13 @@ module AllegroApi
     attr_accessor :is_company
     attr_accessor :is_allegro_standard
     attr_accessor :company
+
+    def state
+      State.find_by_id(state_id)
+    end
+
+    def country
+      Country.find_by_id(country_id)
+    end
   end
 end

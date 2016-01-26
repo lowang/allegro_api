@@ -1,4 +1,4 @@
-require_relative './test_cache'
+require_relative '../test_cache'
 
 describe AllegroApi::Field do
   let(:field) { AllegroApi::Field.new }
@@ -219,8 +219,8 @@ describe AllegroApi::Field do
   end
 
   describe '#value_from_api' do
-    let(:image_data) { File.binread(File.expand_path('../fixtures/image.jpg', __FILE__))}
-    let(:api_image_data) { Base64.encode64(Base64.encode64(image_data))}
+    let(:image_data) { File.binread(File.join(AllegroApi.root,'spec/fixtures/image.jpg')) }
+    let(:api_image_data) { Base64.encode64(Base64.encode64(image_data)) }
 
     let(:api_data) do
       { fid: "1",

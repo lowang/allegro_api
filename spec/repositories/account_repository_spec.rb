@@ -17,7 +17,8 @@ describe AllegroApi::Repository::Account do
     end
     it { is_expected.to be_a(AllegroApi::Account) }
     it { is_expected.to have_attributes(id: 6879039, login: 'ELECTROpl',
-      rating:0, first_name:"Zenon", last_name:"Nowak", maiden_name:"XXXNONAMEXXX", country_id:1, state_id:11,
+      rating:0, first_name:"Zenon", last_name:"Nowak", maiden_name:"XXXNONAMEXXX", country_id:1,
+      country: have_attributes(name: 'Polska', iso: 'PL', id:1), state_id:11, state: have_attributes(name: 'pomorskie', id: 11),
       post_code:"77-400", city:"Złotów", address:"Za Dworcem 1 d", email:"zenon.nowak@electro.pl", phone:"22 122 32 00",
       phone2: nil, is_super_seller: false, is_junior: false, has_shop: false, is_company: true, is_allegro_standard: false)
     }

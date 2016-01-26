@@ -1,4 +1,4 @@
-require_relative './spec_helper'
+require_relative '../spec_helper'
 
 describe AllegroApi::Session do
   let(:session_id) { 1234 }

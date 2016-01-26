@@ -1,11 +1,11 @@
 require 'spec_helper'
-require_relative './test_cache'
+require_relative '../test_cache'
 
 describe AllegroApi::Auction do
   let(:auction) { AllegroApi::Auction.new }
 
-  let(:image_data) { File.binread(File.expand_path('../fixtures/image.jpg', __FILE__))}
-  let(:api_image_data) { Base64.encode64(Base64.encode64(image_data))}
+  let(:image_data) { File.binread(File.join(AllegroApi.root, 'spec/fixtures/image.jpg')) }
+  let(:api_image_data) { Base64.encode64(Base64.encode64(image_data)) }
 
   it 'has fields' do
     expect(auction).to respond_to(:fields)

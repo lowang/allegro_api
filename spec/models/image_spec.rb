@@ -1,6 +1,6 @@
 describe AllegroApi::Image do
-  let(:image_data) { File.binread(File.expand_path('../fixtures/image.jpg', __FILE__))}
-  let(:api_data) { Base64.encode64(Base64.encode64(image_data))}
+  let(:image_data) { File.binread(File.join(AllegroApi.root,'spec/fixtures/image.jpg')) }
+  let(:api_data) { Base64.encode64(Base64.encode64(image_data)) }
   let(:image) { AllegroApi::Image.new(data: image_data) }
 
   it 'has data' do
