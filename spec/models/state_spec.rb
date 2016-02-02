@@ -21,6 +21,10 @@ describe AllegroApi::State do
       subject { AllegroApi::State.find_by_id(state_id) }
       it { is_expected.to be_nil }
     end
+    describe nil do
+      subject { AllegroApi::State.find_by_id(state_id) }
+      it { is_expected.to be_nil }
+    end
   end
   describe 'find_by_name' do
     let(:state_name) { self.class.metadata[:description] }
@@ -29,6 +33,10 @@ describe AllegroApi::State do
       it { is_expected.to have_attributes(id: 2) }
     end
     describe 'pacanowskie' do
+      it { is_expected.to be_nil }
+    end
+    describe nil do
+      subject { AllegroApi::State.find_by_name(nil) }
       it { is_expected.to be_nil }
     end
   end

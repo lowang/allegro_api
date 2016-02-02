@@ -14,6 +14,7 @@ module AllegroApi
       ID_TO_STATE_MAP[state_id] && new(id: state_id, name: ID_TO_STATE_MAP[state_id])
     end
     def self.find_by_name(state_name)
+      return unless state_name.present?
       state_name = state_name.downcase
       STATE_TO_ID_MAP[state_name] && new(id: STATE_TO_ID_MAP[state_name], name: state_name)
     end
