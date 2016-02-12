@@ -1,0 +1,4 @@
+HTTP/1.1 200 OK
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://webapi.allegro.pl/service.php"><SOAP-ENV:Body><ns1:doFinishItemResponse><ns1:finishValue>1</ns1:finishValue></ns1:doFinishItemResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>

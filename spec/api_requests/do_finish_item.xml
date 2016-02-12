@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:urn="https://webapi.allegro.pl/service.php" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <urn:DoFinishItemRequest>
+      <urn:sessionHandle>b9becd5fcb68f541dcc562f6f6e958544385159b030b7b//02_1</urn:sessionHandle>
+      <urn:finishItemId>5983475459</urn:finishItemId>
+    </urn:DoFinishItemRequest>
+  </soapenv:Body>
+</soapenv:Envelope>

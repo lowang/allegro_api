@@ -151,4 +151,24 @@ describe AllegroApi::Repository::Item do
     end
   end
 
+  describe '#destroy' do
+    let(:auction) do
+      AllegroApi::Auction.new.tap do |auction|
+        auction.id = 5983475459
+      end
+    end
+    context 'on success' do
+      before do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_finish_item_success'
+      end
+      subject { auctions_repository.destroy(auction) }
+      it { is_expected.to eq({finish_value: "1"}) }
+      it 'sends proper xml' do
+        expect(client).to receive(:call).with(:do_finish_item, {session_handle:1234, finish_item_id:5983475459}).and_call_original
+        subject
+      end
+    end
+  end
+
 end

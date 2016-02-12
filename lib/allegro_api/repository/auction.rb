@@ -32,6 +32,10 @@ module AllegroApi
         {id: response[:changed_item][:item_id].to_i}
       end
 
+      def destroy(auction)
+        @session.client.call(:do_finish_item, session_handle: @session.id, finish_item_id: auction.id)[:do_finish_item_response]
+      end
+
       private
 
       def scope
