@@ -112,4 +112,43 @@ describe AllegroApi::Repository::Item do
     end
   end
 
+  describe '#update' do
+    let(:auction) do
+      AllegroApi::Auction.new.tap do |auction|
+        auction.id = 5983475459
+        auction.fields[1] = "Ruby on Rails Baseball Jersey "
+        auction.fields[8] = 19.99
+        auction.fields[24]=
+          "<h1>Ruby on Rails Baseball Jersey </h1><p>Eos enim id. Autem sunt velit sunt dolorem aspernatur eius libero. Natus quia in esse illo fuga. In sequi qui quo eum reprehenderit cupiditate ad. Quam reiciendis nostrum id sint soluta.</p>\n"
+      end
+    end
+    context 'on success' do
+      before :each do
+        stub_wsdl_request_for wsdl_url
+        stub_api_response_with 'do_change_item_fields_success'
+      end
+      subject { session.auctions.update(auction) }
+      it { is_expected.to include({id: 5983475459}) }
+      it 'sends proper xml' do
+        expect(client).to receive(:call).with(:do_change_item_fields, {session_id:1234, item_id:5983475459, fields_to_modify:{
+          item:[
+            {fid:1, fvalue_string:"Ruby on Rails Baseball Jersey ", fvalue_int:0, fvalue_float:0, fvalue_image:"", fvalue_datetime:0,
+              fvalue_date:"", fvalue_range_int: {fvalue_range_int_min:0, fvalue_range_int_max:0},
+              fvalue_range_float: {fvalue_range_float_min:0, fvalue_range_float_max:0},
+              fvalue_range_date: {fvalue_range_date_min:"", fvalue_range_date_max:""}},
+            {fid:8, fvalue_string:"", fvalue_int:0, fvalue_float:19.99, fvalue_image:"", fvalue_datetime:0,
+              fvalue_date:"", fvalue_range_int:{fvalue_range_int_min:0, fvalue_range_int_max:0},
+              fvalue_range_float: {fvalue_range_float_min:0, fvalue_range_float_max:0},
+              fvalue_range_date:{fvalue_range_date_min:"", fvalue_range_date_max:""}},
+            {fid:24, fvalue_string: "<h1>Ruby on Rails Baseball Jersey </h1><p>Eos enim id. Autem sunt velit sunt dolorem aspernatur eius libero. Natus quia in esse illo fuga. In sequi qui quo eum reprehenderit cupiditate ad. Quam reiciendis nostrum id sint soluta.</p>\n",
+              fvalue_int:0, fvalue_float:0, fvalue_image:"", fvalue_datetime:0, fvalue_date:"",
+              fvalue_range_int: {fvalue_range_int_min:0, fvalue_range_int_max:0},
+              fvalue_range_float:{fvalue_range_float_min:0, fvalue_range_float_max:0},
+              fvalue_range_date:{fvalue_range_date_min:"", fvalue_range_date_max:""}}]
+          }}).and_call_original
+        subject
+      end
+    end
+  end
+
 end

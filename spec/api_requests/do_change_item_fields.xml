@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:urn="urn:SandboxWebApi" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <urn:DoChangeItemFieldsRequest>
+      <urn:sessionId>1234</urn:sessionId>
+      <urn:itemId>5983475459</urn:itemId>
+      <urn:fieldsToModify>
+        <urn:item>
+          <urn:fid>1</urn:fid>
+          <urn:fvalueString>Ruby on Rails Baseball Jersey</urn:fvalueString>
+          <urn:fvalueInt>0</urn:fvalueInt>
+          <urn:fvalueFloat>0</urn:fvalueFloat>
+          <urn:fvalueImage></urn:fvalueImage>
+          <urn:fvalueDatetime>0</urn:fvalueDatetime>
+          <urn:fvalueDate></urn:fvalueDate>
+          <urn:fvalueRangeInt>
+            <urn:fvalueRangeIntMin>0</urn:fvalueRangeIntMin>
+            <urn:fvalueRangeIntMax>0</urn:fvalueRangeIntMax>
+          </urn:fvalueRangeInt>
+          <urn:fvalueRangeFloat>
+            <urn:fvalueRangeFloatMin>0</urn:fvalueRangeFloatMin>
+            <urn:fvalueRangeFloatMax>0</urn:fvalueRangeFloatMax>
+          </urn:fvalueRangeFloat>
+          <urn:fvalueRangeDate>
+            <urn:fvalueRangeDateMin></urn:fvalueRangeDateMin>
+            <urn:fvalueRangeDateMax></urn:fvalueRangeDateMax>
+          </urn:fvalueRangeDate>
+        </urn:item>
+        <urn:item>
+          <urn:fid>8</urn:fid>
+          <urn:fvalueString></urn:fvalueString>
+          <urn:fvalueInt>0</urn:fvalueInt>
+          <urn:fvalueFloat>19.99</urn:fvalueFloat>
+          <urn:fvalueImage></urn:fvalueImage>
+          <urn:fvalueDatetime>0</urn:fvalueDatetime>
+          <urn:fvalueDate></urn:fvalueDate>
+          <urn:fvalueRangeInt>
+            <urn:fvalueRangeIntMin>0</urn:fvalueRangeIntMin>
+            <urn:fvalueRangeIntMax>0</urn:fvalueRangeIntMax>
+          </urn:fvalueRangeInt>
+          <urn:fvalueRangeFloat>
+            <urn:fvalueRangeFloatMin>0</urn:fvalueRangeFloatMin>
+            <urn:fvalueRangeFloatMax>0</urn:fvalueRangeFloatMax>
+          </urn:fvalueRangeFloat>
+          <urn:fvalueRangeDate>
+            <urn:fvalueRangeDateMin></urn:fvalueRangeDateMin>
+            <urn:fvalueRangeDateMax></urn:fvalueRangeDateMax>
+          </urn:fvalueRangeDate>
+        </urn:item>
+        <urn:item>
+          <urn:fid>24</urn:fid>
+          <urn:fvalueString>&lt;h1&gt;Ruby on Rails Baseball Jersey &lt;/h1&gt;&lt;p&gt;Eos enim id. Autem sunt velit
+            sunt dolorem aspernatur eius libero. Natus quia in esse illo fuga. In sequi qui quo eum reprehenderit
+            cupiditate ad. Quam reiciendis nostrum id sint soluta.&lt;/p&gt;
+          </urn:fvalueString>
+          <urn:fvalueInt>0</urn:fvalueInt>
+          <urn:fvalueFloat>0</urn:fvalueFloat>
+          <urn:fvalueImage></urn:fvalueImage>
+          <urn:fvalueDatetime>0</urn:fvalueDatetime>
+          <urn:fvalueDate></urn:fvalueDate>
+          <urn:fvalueRangeInt>
+            <urn:fvalueRangeIntMin>0</urn:fvalueRangeIntMin>
+            <urn:fvalueRangeIntMax>0</urn:fvalueRangeIntMax>
+          </urn:fvalueRangeInt>
+          <urn:fvalueRangeFloat>
+            <urn:fvalueRangeFloatMin>0</urn:fvalueRangeFloatMin>
+            <urn:fvalueRangeFloatMax>0</urn:fvalueRangeFloatMax>
+          </urn:fvalueRangeFloat>
+          <urn:fvalueRangeDate>
+            <urn:fvalueRangeDateMin></urn:fvalueRangeDateMin>
+            <urn:fvalueRangeDateMax></urn:fvalueRangeDateMax>
+          </urn:fvalueRangeDate>
+        </urn:item>
+      </urn:fieldsToModify>
+    </urn:DoChangeItemFieldsRequest>
+  </soapenv:Body>
+</soapenv:Envelope>

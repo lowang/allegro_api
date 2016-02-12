@@ -27,6 +27,11 @@ module AllegroApi
         {id: response[:item_id].to_i, cost: response[:item_info].sub(',', '.').to_f}
       end
 
+      def update(auction)
+        response = @session.client.call(:do_change_item_fields, session_id: @session.id, item_id: auction.id, fields_to_modify: {item: auction.to_api})[:do_change_item_fields_response]
+        {id: response[:changed_item][:item_id].to_i}
+      end
+
       private
 
       def scope

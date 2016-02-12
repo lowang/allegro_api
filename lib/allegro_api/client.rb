@@ -5,6 +5,7 @@ module AllegroApi
     attr_accessor :country_code
     attr_accessor :logger
     attr_accessor :log_level
+    attr_reader :last_soap_response
 
     def initialize(params = {})
       @wsdl = params[:wsdl] || AllegroApi.wsdl
@@ -23,7 +24,7 @@ module AllegroApi
     end
 
     def call(method_name, params = {})
-      soap_client.call(method_name, message: params).body
+      (@last_soap_response = soap_client.call(method_name, message: params)).body
     rescue Savon::SOAPFault => error
       raise ApiError.new(error.message)
     end

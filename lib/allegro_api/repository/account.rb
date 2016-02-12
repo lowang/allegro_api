@@ -25,7 +25,7 @@ module AllegroApi
          first_name: user_data[:user_first_name],
          last_name: user_data[:user_last_name],
          maiden_name: user_data[:user_maiden_name],
-         company: user_data[:user_company],
+         company_name: user_data[:user_company],
          country_id: user_data[:user_country_id].to_i,
          state_id: user_data[:user_state_id].to_i,
          post_code: user_data[:user_postcode],
