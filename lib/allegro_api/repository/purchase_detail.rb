@@ -16,7 +16,7 @@ module AllegroApi
       private
 
       def get_post_buy_data(item_ids)
-        params = { session_id: @session.id, items_array: item_ids }
+        params = { session_handle: @session.id, items_array: { item: item_ids } }
         response = @session.client.call(:do_get_post_buy_data, params)[:do_get_post_buy_data_response][:items_post_buy_data]
         process_items_response(response, AllegroApi::PurchaseDetail).flatten
       end

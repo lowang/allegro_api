@@ -14,7 +14,7 @@ describe AllegroApi::Repository::Transaction do
     subject { transactions_repository.seller.find([1,2,3]) }
     it 'invokes doGetPostBuyFormsDataForSellers SOAP request' do
       expect(client).to receive(:call).with(:do_get_post_buy_forms_data_for_sellers, session_id: 1234,
-        transactions_ids_array: [{:item=>1}, {:item=>2}, {:item=>3}]).and_return({do_get_post_buy_forms_data_for_sellers_response: {post_buy_form_data: {}}})
+        transactions_ids_array: {item: [1,2,3]}).and_return({do_get_post_buy_forms_data_for_sellers_response: {post_buy_form_data: {}}})
       subject
     end
 

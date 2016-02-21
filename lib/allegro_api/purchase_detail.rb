@@ -47,11 +47,12 @@ module AllegroApi
     attr_accessor :shipment_address
 
     def self.from_api(data)
-      data[:users_post_buy_data][:item].collect do |user_data|
+      Array.wrap(data[:users_post_buy_data][:item]).collect do |user_data|
         event = new
         event.item_id = data[:item_id].to_i
+        user_data = {user_data: user_data.last } if user_data.is_a?(Array)
         event.user = User.from_api(user_data[:user_data])
-        event.shipment_address = ShipmentAddress.from_api(user_data[:user_sent_to_data])
+        event.shipment_address = ShipmentAddress.from_api(user_data[:user_sent_to_data]) if user_data[:user_sent_to_data]
         event
       end
     end

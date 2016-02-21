@@ -23,7 +23,7 @@ module AllegroApi
       def get_transactions(transaction_ids)
         transactions = []
         transaction_ids.each_slice(GET_POST_BUY_PAGE_SIZE) do |slice_ids|
-          params = { session_id: @session.id, transactions_ids_array: slice_ids.map { |transaction_id| {item: transaction_id} }}
+          params = { session_id: @session.id, transactions_ids_array: { item: slice_ids }}
           response = @session.client.call(:"do_get_post_buy_forms_data_for_#{scope}s", params)
           response = response[:"do_get_post_buy_forms_data_for_#{scope}s_response"][:"post_buy_form_data"]
           transactions.concat process_items_response(response, AllegroApi::Transaction)

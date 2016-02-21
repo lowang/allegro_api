@@ -23,6 +23,18 @@ describe AllegroApi::Repository::PurchaseDetail do
         expect(subject.size).to eq 2
         expect(subject).to all(be_instance_of AllegroApi::PurchaseDetail)
       end
+
+      context 'multiple results' do
+        before do
+          stub_api_response_with 'do_get_post_buy_data_array_success'
+        end
+        it 'returns list of transactions' do
+          expect(subject).to be_instance_of Array
+          expect(subject.first.item_id).to eq 5556661234
+          expect(subject.first.user.login).to eq 'tomaszk200'
+          expect(subject.last.item_id).to eq 5556661235
+        end
+      end
     end
   end
 end

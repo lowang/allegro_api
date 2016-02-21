@@ -1,0 +1,130 @@
+HTTP/1.1 200 OK
+Vary: Accept-Encoding
+Set-Cookie: ws2=78119d8a78ab8d2f48f24214540118fa; expires=Fri, 02-Jan-2015 17:12:14 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws3=Na24197d74a9d987cd8e45af3abdfd3c4; expires=Thu, 27-Jul-2113 16:42:14 GMT; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: ws4=x; path=/; domain=.allegro.pl.webapisandbox.pl
+Set-Cookie: TEST_QXLSESSID=35a4c0c1e7b5dc7829554cb0567e3780f18942f20bcc68bb00; path=/; domain=.allegro.pl.webapisandbox.pl
+Cache-Control: private
+Pragma: no-cache
+Content-Type: text/xml; charset=utf-8
+X-Backend: allegro_qeppo
+Content-Length: 5867
+Accept-Ranges: bytes
+Date: Fri, 02 Jan 2015 16:42:14 GMT
+Age: 0
+Connection: keep-alive
+X-Hit: HIT 0
+X-Origin: vte29-frontend-vte01
+X-Frame-Options: SAMEORIGIN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://webapi.allegro.pl/service.php">
+  <SOAP-ENV:Body>
+    <ns1:doGetPostBuyDataResponse>
+      <ns1:itemsPostBuyData>
+        <ns1:item>
+          <ns1:itemId>5556661234</ns1:itemId>
+          <ns1:usersPostBuyData>
+            <ns1:item>
+              <ns1:userData>
+                <ns1:userId>131</ns1:userId>
+                <ns1:userLogin>tomaszk200</ns1:userLogin>
+                <ns1:userRating>500</ns1:userRating>
+                <ns1:userFirstName>Tomasz</ns1:userFirstName>
+                <ns1:userLastName>Kowalski</ns1:userLastName>
+                <ns1:userMaidenName/>
+                <ns1:userCompany>e-kowal Tomasz Kowalski</ns1:userCompany>
+                <ns1:userCountryId>1</ns1:userCountryId>
+                <ns1:userStateId>11</ns1:userStateId>
+                <ns1:userPostcode>81-302</ns1:userPostcode>
+                <ns1:userCity>Gdynia</ns1:userCity>
+                <ns1:userAddress>Sportowa 83A/5</ns1:userAddress>
+                <ns1:userEmail>biuro@example.com</ns1:userEmail>
+                <ns1:userPhone>555999111</ns1:userPhone>
+                <ns1:userPhone2/>
+                <ns1:userSsStatus>0</ns1:userSsStatus>
+                <ns1:siteCountryId>1</ns1:siteCountryId>
+                <ns1:userJuniorStatus>0</ns1:userJuniorStatus>
+                <ns1:userBirthDate>0</ns1:userBirthDate>
+                <ns1:userHasShop>0</ns1:userHasShop>
+                <ns1:userCompanyIcon>0</ns1:userCompanyIcon>
+                <ns1:userIsAllegroStandard>0</ns1:userIsAllegroStandard>
+              </ns1:userData>
+              <ns1:userSentToData>
+                <ns1:userId>0</ns1:userId>
+                <ns1:userFirstName/>
+                <ns1:userLastName/>
+                <ns1:userCompany/>
+                <ns1:userCountryId>0</ns1:userCountryId>
+                <ns1:userPostcode/>
+                <ns1:userCity/>
+                <ns1:userAddress/>
+              </ns1:userSentToData>
+              <ns1:userBankAccounts/>
+              <ns1:companySecondAddress>
+                <ns1:companyWorkerFirstName/>
+                <ns1:companyWorkerLastName/>
+                <ns1:companyAddress/>
+                <ns1:companyPostcode/>
+                <ns1:companyCity/>
+                <ns1:companyCountryId>0</ns1:companyCountryId>
+                <ns1:companyStateId>0</ns1:companyStateId>
+              </ns1:companySecondAddress>
+            </ns1:item>
+          </ns1:usersPostBuyData>
+        </ns1:item>
+        <ns1:item>
+        <ns1:itemId>5556661235</ns1:itemId>
+        <ns1:usersPostBuyData>
+          <ns1:item>
+            <ns1:userData>
+              <ns1:userId>131</ns1:userId>
+              <ns1:userLogin>tomaszk200</ns1:userLogin>
+              <ns1:userRating>500</ns1:userRating>
+              <ns1:userFirstName>Tomasz</ns1:userFirstName>
+              <ns1:userLastName>Kowalski</ns1:userLastName>
+              <ns1:userMaidenName/>
+              <ns1:userCompany>e-kowal Tomasz Kowalski</ns1:userCompany>
+              <ns1:userCountryId>1</ns1:userCountryId>
+              <ns1:userStateId>11</ns1:userStateId>
+              <ns1:userPostcode>81-302</ns1:userPostcode>
+              <ns1:userCity>Gdynia</ns1:userCity>
+              <ns1:userAddress>Sportowa 83A/5</ns1:userAddress>
+              <ns1:userEmail>biuro@example.com</ns1:userEmail>
+              <ns1:userPhone>555999111</ns1:userPhone>
+              <ns1:userPhone2/>
+              <ns1:userSsStatus>0</ns1:userSsStatus>
+              <ns1:siteCountryId>1</ns1:siteCountryId>
+              <ns1:userJuniorStatus>0</ns1:userJuniorStatus>
+              <ns1:userBirthDate>0</ns1:userBirthDate>
+              <ns1:userHasShop>0</ns1:userHasShop>
+              <ns1:userCompanyIcon>0</ns1:userCompanyIcon>
+              <ns1:userIsAllegroStandard>0</ns1:userIsAllegroStandard>
+            </ns1:userData>
+            <ns1:userSentToData>
+              <ns1:userId>0</ns1:userId>
+              <ns1:userFirstName/>
+              <ns1:userLastName/>
+              <ns1:userCompany/>
+              <ns1:userCountryId>0</ns1:userCountryId>
+              <ns1:userPostcode/>
+              <ns1:userCity/>
+              <ns1:userAddress/>
+            </ns1:userSentToData>
+            <ns1:userBankAccounts/>
+            <ns1:companySecondAddress>
+              <ns1:companyWorkerFirstName/>
+              <ns1:companyWorkerLastName/>
+              <ns1:companyAddress/>
+              <ns1:companyPostcode/>
+              <ns1:companyCity/>
+              <ns1:companyCountryId>0</ns1:companyCountryId>
+              <ns1:companyStateId>0</ns1:companyStateId>
+            </ns1:companySecondAddress>
+          </ns1:item>
+        </ns1:usersPostBuyData>
+      </ns1:item>
+      </ns1:itemsPostBuyData>
+    </ns1:doGetPostBuyDataResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
