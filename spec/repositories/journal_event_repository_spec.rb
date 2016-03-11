@@ -21,6 +21,8 @@ describe AllegroApi::Repository::JournalEvent do
     end
 
     it 'performs code of the block for each page of events' do
+      expect(journal_events_repository).to receive(:from).with(3)
+      expect(journal_events_repository).to receive(:from).with(7)
       expect(in_block_code).to receive(:call).with(AllegroApi::JournalEvent).exactly(8).times
       event_ids = []
       journal_events_repository.each {|event| event_ids  << event.id; in_block_code.call(event) }

@@ -22,6 +22,8 @@ describe AllegroApi::Repository::DealEvent do
     end
 
     it 'performs code of the block for each page of events' do
+      expect(deal_events_repository).to receive(:from).with(3)
+      expect(deal_events_repository).to receive(:from).with(6)
       expect(in_block_code).to receive(:call).with(AllegroApi::DealEvent).exactly(7).times
       event_ids = []
       deal_events_repository.each {|event| event_ids  << event.id; in_block_code.call(event) }

@@ -17,7 +17,7 @@ module AllegroApi
           while(events_counter > 0)
             events = get_site_journal_events
             events.each { |event| enum << event }
-            starting_point = events.last.id
+            from(events.last.id)
             events_counter -= events.size
           end
         end.memoizing
@@ -35,7 +35,6 @@ module AllegroApi
         params = { session_handle: @session.id }
         params[:starting_point] = starting_point if starting_point
         response = @session.client.call(:do_get_site_journal, params)
-        # binding.pry
         response = response[:do_get_site_journal_response][:site_journal_array]
         process_items_response(response, AllegroApi::JournalEvent)
       end
